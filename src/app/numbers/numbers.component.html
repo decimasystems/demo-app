@@ -1,0 +1,11 @@
+<div>
+  <label for="no_id">Give a number:</label><br><br>
+  <input type="text" id="no_id" [(ngModel)]="nr">
+  <br/><br/>
+</div>
+
+<button type="submit" (click)="onclick()"> Submit </button>
+
+<div role="alert" *ngIf="message">
+  <p> Conversion to romanian letters: {{ message }} </p>
+</div>

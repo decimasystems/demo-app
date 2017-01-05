@@ -1,0 +1,5 @@
+<input type="text" id="cnp_id" [(ngModel)]="cnpInput">
+<button (click)="onClick()">Validate</button>
+<br><br/>
+
+<div role="alert" *ngIf="message">{{message}}</div>
