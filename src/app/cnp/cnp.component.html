@@ -1,5 +1,9 @@
-<input type="text" id="cnp_id" [(ngModel)]="cnpInput">
-<button (click)="onClick()">Validate</button>
-<br><br/>
+ <form [formGroup]="myForm">
 
+<input type="text" id="cnp_id" [formControl]="cnpInput">
+
+    
+
+ </form>
+ 
 <div role="alert" *ngIf="message">{{message}}</div>
