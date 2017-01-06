@@ -1,10 +1,12 @@
+<form [formGroup]="myForm" > <!--(ngSubmit)="onSubmit(myForm.value)"-->
 <div>
   <label for="no_id">Give a number:</label><br><br>
-  <input type="text" id="no_id" [(ngModel)]="nr">
+  <input type="text" id="no_id" [formControl]="nr">
   <br/><br/>
 </div>
 
-<button type="submit" (click)="onclick()"> Submit </button>
+<!--<button type="submit"> Submit </button>-->
+</form>
 
 <div role="alert" *ngIf="message">
   <p> Conversion to romanian letters: {{ message }} </p>

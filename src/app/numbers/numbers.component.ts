@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Numeral } from 'numbertowords/numeral.js';
+import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'numbers',
@@ -8,16 +9,26 @@ import { Numeral } from 'numbertowords/numeral.js';
 })
 export class NumbersComponent {
   message: string;
-  nr: any;
-  constructor() {
+  nr: AbstractControl;
+  myForm: FormGroup;
+
+  constructor(fb: FormBuilder) {
     this.message = '';
 
+    this.myForm = fb.group({
+      '': ['', Validators.required]
+    });
+    this.nr = this.myForm.controls[''];
+    this.nr.valueChanges.subscribe(
+      (value: string) => {
+        var numeral = new Numeral(value);
+        this.message = numeral.ToWord();
+        return this.message;
+      });
   }
-
-  onclick() {
-
-    var numeral = new Numeral(this.nr);
-    this.message = numeral.ToWord();
-  }
+ /* onSubmit(value: string): void {
+    console.log('you submitted value:', value);
+  }*/
 
 }
+
