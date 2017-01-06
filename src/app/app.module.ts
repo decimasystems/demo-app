@@ -21,8 +21,7 @@ const routes: Routes = [
     HomeComponent,
     CnpComponent,
     NumbersComponent,
-
-  ],
+],
 
   imports: [
     BrowserModule,
