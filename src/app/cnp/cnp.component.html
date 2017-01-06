@@ -1,9 +1,27 @@
  <form [formGroup]="myForm">
+     <label for="series_id">Enter the IC series: </label>
+     <input type="text" id="series_id" [formControl]="seriesInput"><div role="alert" *ngIf="message1">{{message1}}</div><br>
 
-<input type="text" id="cnp_id" [formControl]="cnpInput">
+      <label for="number_id">Enter the IC number: </label>
+     <input type="text" id="number_id" [formControl]="numberInput"><div role="alert" *ngIf="message">{{message}}</div><br>
 
-    
+     <label for="cnp_id">Give a Romanian CNP: </label>
+<input type="text" id="cnp_id" [formControl]="cnpInput"><div role="alert" *ngIf="message5">{{message5}}</div><br/>
 
+     <label for="lastname_id">Enter your last name: </label>
+     <input type="text" id="lastname_id" [formControl]="lastInput"><div role="alert" *ngIf="message2">{{message2}}</div><br>
+
+     <label for="firstname_id">Enter your first name: </label>
+     <input type="text" id="firstname_id" [formControl]="firstInput"><div role="alert" *ngIf="message3">{{message3}}</div><br>
+
+     <label for="nationality_id">Enter your nationality: </label>
+     <input type="text" id="nationality_id" [formControl]="nationalityInput"><div role="alert" *ngIf="message4">{{message4}}</div><br>
+
+<label for="adress_id">Enter your adress: </label>
+     <input type="text" id="adress_id" [formControl]="adressInput"><br>
+
+<label for="validity_id">Enter your IC valability: </label>
+     <input type="date" id="validity_id" [formControl]="validityInput">To
+       <input type="date"  [formControl]="validityInput2"><br>
  </form>
- 
-<div role="alert" *ngIf="message">{{message}}</div>
+ <br>
