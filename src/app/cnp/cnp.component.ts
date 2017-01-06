@@ -1,24 +1,34 @@
 import { Component} from '@angular/core';
 import {CNP} from 'cnp.js/cnp.js';
+
+import{FormGroup,AbstractControl,FormBuilder,Validators} from '@angular/forms'
 @Component({
   selector: 'cnp',
   templateUrl: './cnp.component.html',
   styleUrls: ['./cnp.component.css']
 })
 export class CnpComponent {
-  cnpInput:string;
+ myForm:FormGroup;
+ cnpInput:AbstractControl
   message: string;
   
-  constructor() {}
-
-  onClick(){
-    var cod=new CNP(this.cnpInput);
-    this.message = '';
-    if (cod.isValid)
-      this.message = "Valid!";
-    else
-      this.message = "Invalid!";
-
+  constructor(fb:FormBuilder) {
+     this.myForm = fb.group({
+      '':  ['', Validators.required]
+     });
+    this.cnpInput = this.myForm.controls[''];
+     this.cnpInput.valueChanges.subscribe(
+      (value: string) => {
+        var cod=new CNP(value);
+        if(cod.isValid)
+        this.message="Cod valid!";
+        else
+        this.message="Cod invalid!";
+        return this.message;
+      }
+    );
+    
   }
+    
 
 }
