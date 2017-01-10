@@ -22,7 +22,7 @@ export class NumbersComponent {
     this.nr.valueChanges.subscribe(
       (value: string) => {
         var numeral = new Numeral(value);
-        this.message = numeral.ToWord();
+        this.message = numeral.convertMoney('leu', 'lei','ban','bani');
         return this.message;
       });
   }
