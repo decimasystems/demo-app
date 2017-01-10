@@ -26,9 +26,5 @@ export class NumbersComponent {
         return this.message;
       });
   }
- /* onSubmit(value: string): void {
-    console.log('you submitted value:', value);
-  }*/
-
-}
+ }
 
