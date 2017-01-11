@@ -9,6 +9,7 @@ import { CnpComponent } from './cnp/cnp.component';
 import { NumbersComponent } from './numbers/numbers.component';
 import { ListComponent } from './list/list.component';
 import { AboutComponent } from './about/about.component';
+import { ListDeleteComponent } from './list-delete/list-delete.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'numbers', component: NumbersComponent },
   { path: 'cnp', component: CnpComponent },
   {path: 'list', component: ListComponent},
-  {path:'about/:id', component: AboutComponent}
+  {path:'about/:id', component: AboutComponent},
+  {path:'list-delete/:id', component:ListDeleteComponent}
 ];
 
 @NgModule({
@@ -27,6 +29,7 @@ const routes: Routes = [
     NumbersComponent,
     ListComponent,
     AboutComponent,
+    ListDeleteComponent,
 ],
 
   imports: [
