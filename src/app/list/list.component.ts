@@ -16,5 +16,8 @@ export class ListComponent implements OnInit {
   link(cnp: string): string {
     return "/about/" + cnp;
   }
+  delete(cnp:string){
+    
+  }
 
 }
