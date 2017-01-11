@@ -1,0 +1,9 @@
+
+<table border="1" width=50% height=70%>
+  <tr><th>CNP:</th></tr>
+  <tr><th></th></tr>
+     <tr><td><div *ngFor="let d of date" > {{d.cnp}}<a [routerLink]="link(d.cnp)"> Vezi detalii</a></div></td></tr>
+     <td></td>
+</table>
+<a routerLink="../cnp"> Add a new CNP</a>
+

@@ -1,7 +1,32 @@
 import { Component } from '@angular/core';
 import { CNP } from 'cnp.js/cnp.js';
 
-import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms'
+
+function inputTextValidator(control: FormControl): { [s: string]: boolean } {
+  if (control.value.search(/[A-Za-z]/))
+    return { invalidInput: true };
+}
+function inputNumberValidator(control: FormControl): { [s: string]: boolean } {
+  if (control.value.search(/[0-9]/))
+    return { validNumber: true };
+}
+function lengthValid2(control: FormControl): { [s: string]: boolean } {
+  if (control.value.length!= 2)
+    return { validLength: true};
+}
+function lengthValid6(control: FormControl): { [s: string]: boolean } {
+  if (control.value.length!= 6)
+    return { validLength6: true};
+}
+function cnpValid(control: FormControl): { [s: string]: boolean } {
+  var cod = new CNP(control.value);
+  if(!cod.isValid )
+  return { codValid: true};
+
+}
+
+
 @Component({
   selector: 'cnp',
   templateUrl: './cnp.component.html',
@@ -9,112 +34,68 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
 })
 export class CnpComponent {
   myForm: FormGroup;
-  cnpInput: AbstractControl;
-  lastInput: AbstractControl;
-  firstInput: AbstractControl;
-  nationalityInput: AbstractControl;
-  seriesInput:AbstractControl;
-  numberInput:AbstractControl;
-  adressInput:AbstractControl;
-  validityInput:AbstractControl;
-    validityInput2:AbstractControl;
-  message: string;
-message1: string;
-message2: string;
-message3: string;
+  cnp: AbstractControl;
+  lastName: AbstractControl;
+  firstName: AbstractControl;
+  nationality: AbstractControl;
+  series: AbstractControl;
+  number: AbstractControl;
+  birth: AbstractControl;
+  adress: AbstractControl;
+  valid1: AbstractControl;
+  valid2: AbstractControl;
+  issued: AbstractControl;
 
-message4: string;
-message5: string;
+
   constructor(fb: FormBuilder) {
     this.myForm = fb.group({
-      'seriesInput':['', Validators.required],
-        'numberInput':['', Validators.required],
-        'cnpInput': ['', Validators.required],
-      'lastInput': ['', Validators.required],
-      'firstInput': ['', Validators.required],
-      'nationalityInput': ['', Validators.required],
-      'adressInput': ['', Validators.required],
-       'validityInput': ['', Validators.required],
-             'validityInput2': ['', Validators.required],
-      
+      'series': ['', Validators.compose([Validators.required, lengthValid2, inputTextValidator])],
+      'number': ['', Validators.compose([Validators.required, inputNumberValidator, lengthValid6])],
+      'cnp': ['', Validators.compose([Validators.required, cnpValid])],
+      'lastName': ['', Validators.compose([Validators.required, inputTextValidator])],
+      'firstName': ['', Validators.compose([Validators.required, inputTextValidator])],
+      'nationality': ['', Validators.compose([Validators.required, inputTextValidator])],
+      'birth': ['', Validators.compose([Validators.required, inputTextValidator])],
+      'adress': ['', Validators.required],
+      'issued': ['', Validators.compose([Validators.required, inputTextValidator])],
+      'valid1': ['', Validators.required],
+      'valid2': ['', Validators.required]
     })
 
-    this.seriesInput=this.myForm.controls['seriesInput'];
-     this.seriesInput.valueChanges.subscribe(
-      (value: string) => {
-       if(value.length==2&& isNaN(+value[0])&& isNaN(+value[1]))
-       this.message1="Corect!";
-       else
-       this.message1="Incorect!"
-      }
-    );
-    this.numberInput=this.myForm.controls['numberInput'];
-     this.numberInput.valueChanges.subscribe(
-      (value: string) => {
-        if(value.length==6){
-        for(var i=0;i<value.length;i++){
-          if(isNaN(+value[i]))
-          this.message="Incorect"
-          else
-          this.message="Corect!"
-        }
-      }
-      return this.message;
-      }
-    );
-        this.lastInput = this.myForm.controls['lastInput'];
-    this.lastInput.valueChanges.subscribe(
-      (value: string) => {
-       for(var i=0;i<value.length;i++)
-       {
-         if(!isNaN(+value[i]))
-         this.message2="Numele nu trebuie sa contina cifre!"
-         else
-         this.message2="Corect!"
-       }
-       return this.message2;
-      }
-    );
-    this.firstInput = this.myForm.controls['firstInput'];
-    this.firstInput.valueChanges.subscribe(
-      (value: string) => {
-       for(var i=0;i<value.length;i++)
-       {
-         if(!isNaN(+value[i]))
-         this.message3="Numele nu trebuie sa contina cifre!"
-         else
-         this.message3="Corect!"
-       }
-       return this.message3;
-      }
-    );
-    this.nationalityInput = this.myForm.controls['nationalityInput'];
-    this.nationalityInput.valueChanges.subscribe(
-      (value: string) => {
-        for(var i=0;i<value.length;i++)
-       {
-         if(!isNaN(+value[i]))
-         this.message4="Valoarea introdusa nu trebuie sa contina cifre!"
-         else
-         this.message4="Corect!"
-       }
-       return this.message4;
-      }
-    );
-    this.cnpInput = this.myForm.controls['cnpInput'];
-    this.cnpInput.valueChanges.subscribe(
-      (value: string) => {
-        var cod = new CNP(value);
-        if (cod.isValid)
-          this.message5 = "Cod valid!";
-        else
-          this.message5 = "Cod invalid!";
-        return this.message5;
-      }
-    );
-    this.adressInput=this.myForm.controls['adressInput'];
-this.validityInput=this.myForm.controls['validityInput'];
-this.validityInput2=this.myForm.controls['validityInput2'];
+    this.series = this.myForm.controls['series'];
+
+    this.number = this.myForm.controls['number'];
+
+    this.lastName = this.myForm.controls['lastName'];
+
+    this.firstName = this.myForm.controls['firstName'];
+
+    this.nationality = this.myForm.controls['nationality'];
+
+    this.cnp = this.myForm.controls['cnp'];
+
+    this.adress = this.myForm.controls['adress'];
+
+    this.birth = this.myForm.controls['birth'];
+
+    this.valid1 = this.myForm.controls['valid1'];
+    
+    this.valid2 = this.myForm.controls['valid2'];
+
+    this.issued = this.myForm.controls['issued'];
+  }
+  onClick() {
+    var buletine:any[];
+    var  key:string='vector';
+    buletine=JSON.parse(localStorage.getItem(key));
+    if(!buletine){
+      buletine=[];
+    }
+    buletine.push(this.myForm.value);
+    localStorage.setItem(key, JSON.stringify(buletine));
+
   }
 
+
 }
+
