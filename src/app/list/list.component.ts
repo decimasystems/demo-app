@@ -19,10 +19,12 @@ export class ListComponent implements OnInit {
     }
     delete(cnp:string) {
         this.b = _.remove(this.date, 
-        x => {
-            return x== cnp;
-        })
-        //localStorage.setItem(this.key, JSON.stringify(this.date))
+        x => { 
+
+            return x.cnp==cnp;
+})
+
+        localStorage.setItem(this.key, JSON.stringify(this.date))
 
     }
 

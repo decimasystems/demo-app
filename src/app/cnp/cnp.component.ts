@@ -12,17 +12,17 @@ function inputNumberValidator(control: FormControl): { [s: string]: boolean } {
     return { validNumber: true };
 }
 function lengthValid2(control: FormControl): { [s: string]: boolean } {
-  if (control.value.length!= 2)
-    return { validLength: true};
+  if (control.value.length != 2)
+    return { validLength: true };
 }
 function lengthValid6(control: FormControl): { [s: string]: boolean } {
-  if (control.value.length!= 6)
-    return { validLength6: true};
+  if (control.value.length != 6)
+    return { validLength6: true };
 }
 function cnpValid(control: FormControl): { [s: string]: boolean } {
   var cod = new CNP(control.value);
-  if(!cod.isValid )
-  return { codValid: true};
+  if (!cod.isValid)
+    return { codValid: true };
 
 }
 
@@ -79,20 +79,21 @@ export class CnpComponent {
     this.birth = this.myForm.controls['birth'];
 
     this.valid1 = this.myForm.controls['valid1'];
-    
+
     this.valid2 = this.myForm.controls['valid2'];
 
     this.issued = this.myForm.controls['issued'];
   }
   onClick() {
-    var buletine:any[];
-    var  key:string='vector';
-    buletine=JSON.parse(localStorage.getItem(key));
-    if(!buletine){
-      buletine=[];
+    var buletine: any[];
+    var key: string = 'vector';
+    buletine = JSON.parse(localStorage.getItem(key));
+    if (!buletine) {
+      buletine = [];
     }
     buletine.push(this.myForm.value);
     localStorage.setItem(key, JSON.stringify(buletine));
+
 
   }
 

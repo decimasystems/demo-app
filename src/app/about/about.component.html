@@ -1,39 +1,41 @@
-<form>
+<form [formGroup]="myForm">
 
 
   <div *ngIf="persoana">
     <label for="serie_id">Series: </label>
-    <input type="text" id="series_id" value="{{persoana.series}}" readonly>
+    <input type="text" id="series_id" [formControl]="series">
 
     <label for="number_id">Number: </label>
-    <input type="text" id="number_id" value="{{persoana.number}}"readonly><br>
+    <input type="text" id="number_id" [formControl]="number"><br>
 
     <label for="cnp_id">CNP</label>
-    <input type="text" id="cnp_id" value=" {{persoana.cnp}}"readonly><br>
+    <input type="text" id="cnp_id" [formControl]="cnp"><br>
 
     <label for="last_id">Last name: </label>
-    <input type="text" id="last_id" value="{{persoana.lastName}}"readonly><br>
+    <input type="text" id="last_id" [formControl]="lastName"><br>
 
     <label for="first_id">First name: </label>
-    <input type="text" id="first_id" value="{{persoana.firstName}}"readonly><br>
+    <input type="text" id="first_id" [formControl]="firstName"><br>
 
     <label for="nationality_id">Nationality: </label>
-    <input type="text" id="nationality_id" value="{{persoana.nationality}}"readonly><br>
+    <input type="text" id="nationality_id" [formControl]="nationality"><br>
 
     <label for="birth_id">Birth place: </label>
-    <input type="text" id="birth_id" value="{{persoana.birth}}"readonly><br>
+    <input type="text" id="birth_id" [formControl]="birth"><br>
 
     <label for="adress_id">Adress: </label>
-    <input type="text" id="adress_id" value="{{persoana.adress}}" size="50"readonly><br>
+    <input type="text" id="adress_id" size="50" [formControl]="adress"><br>
 
     <label for="issued_id">Issued by: </label>
-    <input type="text" id="issued_id" value="{{persoana.issued}}"readonly><br>
+    <input type="text" id="issued_id" [formControl]="issued"><br>
 
     <label for="valid_id">Valability: </label>
-    <input type="date" id="valid_id" value="{{persoana.valid1}}"readonly>-
-    <input type="date"  value="{{persoana.valid2}}"readonly><br>
-
+    <input type="date" id="valid_id" [formControl]="valid1">-
+    <input type="date" [formControl]="valid2"><br>
+    
+    <button type="button" (click)="update(persoana.cnp)">Update</button>
   </div>
+
 </form>
 
 <a routerLink="../../list">Inapoi la lista</a>
