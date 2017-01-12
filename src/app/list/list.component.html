@@ -1,10 +1,15 @@
-
 <table border="1" width=50% height=70%>
-  <tr><th>CNP:</th></tr>
-  <tr><th></th></tr>
-     <tr><td><div *ngFor="let d of date" > {{d.cnp}}
-    <a [routerLink]="link(d.cnp)"> Vezi detalii</a>
-    </div></td></tr>
+  <tr>
+    <th>CNP:</th>
+  </tr>
+  <tr *ngFor="let d of date">
+    <td> {{d.cnp}}</td>
+    <td>
+      <a [routerLink]="link(d.cnp)"> Vezi detalii</a>
+    </td>
+    <td>
+      <button type="button" (click)="delete(d.cnp)">Sterge</button>
+    </td>
+  </tr>
 </table>
 <a routerLink="../cnp"> Add a new CNP</a>
-

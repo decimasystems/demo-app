@@ -6,8 +6,8 @@ var _ = require('lodash');
     styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-    date: string[];
-    b: string[];
+    date: string[] = [];
+    b:string[];
     key: string = 'vector';
     constructor() { }
 
@@ -17,9 +17,12 @@ export class ListComponent implements OnInit {
     link(cnp: string): string {
         return "/about/" + cnp;
     }
-    delete(cnp: string): string {
-
-        return "/list-delete/" + cnp;
+    delete(cnp:string) {
+        this.b = _.remove(this.date, 
+        x => {
+            return x== cnp;
+        })
+        //localStorage.setItem(this.key, JSON.stringify(this.date))
 
     }
 

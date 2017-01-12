@@ -15,11 +15,8 @@ export class ListDeleteComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => this.cnp = params['id']);
     this.b = JSON.parse(localStorage.getItem('vector'))
-    for (var i = 0; i < this.b.length; i++) {
-      if (this.b[i].cnp == this.cnp)
-        this.b[i] = this.b[i + 1];
-    }
-    // this.sters=_.remove(this.b,function(cnp){return this.b.cnp==this.cnp;})
+   
+    // 
   }
 
 }
