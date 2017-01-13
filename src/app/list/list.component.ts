@@ -15,7 +15,7 @@ export class ListComponent implements OnInit {
         this.date = JSON.parse(localStorage.getItem(this.key));
     }
     link(cnp: string): string {
-        return "/about/" + cnp;
+        return "/cnpdetails/" + cnp;
     }
     delete(cnp:string) {
         this.b = _.remove(this.date, 

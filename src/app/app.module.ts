@@ -5,31 +5,33 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes,ActivatedRoute } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { CnpComponent } from './cnp/cnp.component';
+import { AddComponent } from './add/add.component';
 import { NumbersComponent } from './numbers/numbers.component';
 import { ListComponent } from './list/list.component';
-import { AboutComponent } from './about/about.component';
-import { ListDeleteComponent } from './list-delete/list-delete.component';
+import { DetailsComponent } from './cnpdetails/cnpdetails.component';
+import { IdentityCardComponent } from './identitycard/identitycard.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'numbers', component: NumbersComponent },
-  { path: 'cnp', component: CnpComponent },
+  { path: 'identitycard', component: IdentityCardComponent },
   {path: 'list', component: ListComponent},
-  {path:'about/:id', component: AboutComponent},
-  {path:'list-delete/:id', component:ListDeleteComponent}
+  {path:'cnpdetails/:id', component: DetailsComponent},
+  {path: 'add', component:AddComponent}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CnpComponent,
+    AddComponent,
     NumbersComponent,
     ListComponent,
-    AboutComponent,
-    ListDeleteComponent,
+    DetailsComponent,
+    IdentityCardComponent,
+
 ],
 
   imports: [

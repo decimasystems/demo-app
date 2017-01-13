@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute,Route,Router } from '@angular/router';
 
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms'
 var _ = require('lodash');
 @Component({
-  selector: 'about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css']
+  selector: 'cnpdetails',
+  templateUrl: './cnpdetails.component.html',
+  styleUrls: ['./cnpdetails.component.css']
 })
-export class AboutComponent implements OnInit {
+export class DetailsComponent implements OnInit {
   myForm: FormGroup;
   cnp: AbstractControl;
   lastName: AbstractControl;
@@ -21,14 +21,13 @@ export class AboutComponent implements OnInit {
   valid1: AbstractControl;
   valid2: AbstractControl;
   issued: AbstractControl;
-
   cnpRoute: string
   buletin: any[] = [];
   persoana: any;
   date: any[] = [];
   b: any;
   key: string = 'vector';
-  constructor(private route: ActivatedRoute, private fb: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private fb: FormBuilder, private router:Router) { }
   buildForm() {
     this.myForm = this.fb.group({
       'series': [this.persoana.series, Validators.required],
@@ -82,6 +81,7 @@ export class AboutComponent implements OnInit {
       })
     this.date.push(this.myForm.value)
     localStorage.setItem(this.key, JSON.stringify(this.date))
+   this.router.navigate(['list'])
   }
 
 }
