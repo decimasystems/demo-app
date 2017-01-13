@@ -1,58 +1,114 @@
-<form [formGroup]="myForm">
+<form [formGroup]="myForm" *ngIf="myForm">
+    <p>
+        <label for="series_id">Serie card identitate: </label>
+        <input type="text" id="series_id" [formControl]="series">
+        <span *ngIf="display && number.hasError('validInput')">Trebuie sa contina doar cifre!</span>
+        <span *ngIf="display && number.hasError('validLength')">Trebuie sa contina doar 2 caractere!</span>
+    </p>
+
+    <p>
+        <label for="number_id">Numar: </label>
+        <input type="text" id="number_id" [formControl]="number">
+        <span *ngIf="display && number.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+        <span *ngIf="display && number.hasError('validLength6')">Trebuie sa contina doar 6 cifre!</span>
+    </p>
+
+    <p>
+        <label for="cnp_id">CNP: </label>
+        <input type="text" id="cnp_id" [formControl]="cnp">
+        <span *ngIf="display && cnp.hasError('codValid')">CNP invalid!</span>
+    </p>
+
+    <p>
+        <label for="lastname_id">Nume: </label>
+        <input type="text" id="lastname_id" [formControl]="lastName">
+        <span *ngIf="display && lastName.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
+
+    <p>
+        <label for="firstname_id">Prenume: </label>
+        <input type="text" id="firstname_id" [formControl]="firstName">
+        <span *ngIf="display && firstName.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
+
+    <p>
+        <label for="nationality_id">Nationalitate: </label>
+        <input type="text" id="nationality_id" [formControl]="nationality">
+        <span *ngIf="display && nationality.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
+
+    <p>
+        <label for="birth_id">Locul nasterii: </label>
+        <input type="text" id="birth_id" [formControl]="birth">
+        <span *ngIf="display && nationality.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
+
+    <p>
+        <label>Adresa: </label>
+    </p>
+    <p>
+        <label>Judet</label>
+        <input type="text" [formControl]="county">
+    </p>
 
 
-    <label for="series_id">Enter the IC series: </label>
-    <input type="text" id="series_id" [formControl]="series">
-    <div *ngIf="display">
-        <div *ngIf="series.hasError('invalidInput')">Campul series trebuie sa contina doar litere!</div>
-    </div>
-    <div *ngIf="display">
-        <div *ngIf="series.hasError('validLength')">Campul series trebuie sa contina doar 2 caractere!</div>
-    </div><br>
+    <p>
+        <label>Localitate/ Oras: </label>
+        <input type="text" [formControl]="city">
+        <span *ngIf="display && firstName.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
 
-    <label for="number_id">Enter the IC number: </label>
-    <input type="text" id="number_id" [formControl]="number">
-    <div *ngIf="display">
-        <div *ngIf="number.hasError('validNumber')">Trebuie sa contina doar cifre!</div>
-    </div>
-    <div *ngIf="display">
-        <div *ngIf="number.hasError('validLength6')">Trebuie sa contina doar 6 cifre!</div>
-    </div><br>
+    <p>
+        <label>Str: </label>
+        <input type="text" [formControl]="street">
+        <span *ngIf="display">
+            <span *ngIf="display && firstName.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+        </span>
+    </p>
 
-    <label for="cnp_id">Give a Romanian CNP: </label>
-    <input type="text" id="cnp_id" [formControl]="cnp">
-    <div *ngIf="display"><div *ngIf="cnp.hasError('codValid')">CNP invalid!</div></div><br/>
+    <p>
+        <label>Nr: </label>
+        <input type="text" [formControl]="streetNr">
+        <span *ngIf="display">
+            <span *ngIf="display && number.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+        </span>
+    </p>
 
-    <label for="lastname_id">Enter your last name: </label>
-    <input type="text" id="lastname_id" [formControl]="lastName">
-    <div *ngIf="display"> <div *ngIf="lastName.hasError('invalidInput')">Trebuie sa contina doar litere!</div></div><br>
+    <p>
+        <label>Bl: </label>
+        <input type="text" [formControl]="block">
+    </p>
 
-    <label for="firstname_id">Enter your first name: </label>
-    <input type="text" id="firstname_id" [formControl]="firstName">
-    <div *ngIf="display"><div *ngIf="firstName.hasError('invalidInput')">Trebuie sa contina doar litere!</div></div><br>
+    <p>
+        <label>Sc: </label>
+        <input type="text" [formControl]="scale">
+    </p>
 
+    <p>
+        <label>Et: </label>
+        <input type="text" [formControl]="floor">
+        <span *ngIf=" display && number.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+    </p>
 
-    <label for="nationality_id">Enter your nationality: </label>
-    <input type="text" id="nationality_id" [formControl]="nationality">
-    <div *ngIf="display"><div *ngIf="nationality.hasError('invalidInput')">Trebuie sa contina doar litere!</div></div><br>
+    <p>
+        <label>Ap: </label>
+        <input type="text" [formControl]="apartament">
+        <span *ngIf="display && number.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+    </p>
 
-    <label for="birth_id">Enter the place of birth: </label>
-    <input type="text" id="birth_id" [formControl]="birth">
-    <div *ngIf="display"> <div *ngIf="nationality.hasError('invalidInput')">Trebuie sa contina doar litere!</div></div><br>
+    <p>
+        <label for="issued_id">Eliberat de: </label>
+        <input type="text" id="issued_id" [formControl]="issued">
+        <span *ngIf="display && issued.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
 
-    <label for="adress_id">Enter your adress: </label>
-    <input type="text" id="adress_id" size="50" [formControl]="adress"><br>
+    <p>
+        <label for="validity_id">Valabilitate: </label>
+        <input type="date" id="validity_id" [formControl]="valid1">Pana la
+        <input type="date" [formControl]="valid2">
+    </p>
 
-    <label for="issued_id">Issued by: </label>
-    <input type="text" id="issued_id" [formControl]="issued">
-    <div *ngIf="display"><div *ngIf="issued.hasError('invalidInput')">Trebuie sa contina doar litere!</div></div><br>
-
-    <label for="validity_id">Enter your IC valability: </label>
-
-    <input type="date" id="validity_id" [formControl]="valid1">To
-    <input type="date" [formControl]="valid2"><br>
-
-    <button type="button" (click)="onClick()">Adaugati in lista</button>
+    <a type="button" (click)="onClick()">Adaugati in lista</a>
 
 
 

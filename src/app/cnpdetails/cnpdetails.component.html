@@ -2,37 +2,53 @@
 
 
   <div *ngIf="persoana">
-    <label for="serie_id">Series: </label>
+    <label for="serie_id">Serie card identitate: </label>
     <input type="text" id="series_id" [formControl]="series">
 
-    <label for="number_id">Number: </label>
+    <label for="number_id">Numar: </label>
     <input type="text" id="number_id" [formControl]="number"><br>
 
     <label for="cnp_id">CNP</label>
     <input type="text" id="cnp_id" [formControl]="cnp"><br>
 
-    <label for="last_id">Last name: </label>
+    <label for="last_id">Nume: </label>
     <input type="text" id="last_id" [formControl]="lastName"><br>
 
-    <label for="first_id">First name: </label>
+    <label for="first_id">Prenume: </label>
     <input type="text" id="first_id" [formControl]="firstName"><br>
 
-    <label for="nationality_id">Nationality: </label>
+    <label for="nationality_id">Nationalitate: </label>
     <input type="text" id="nationality_id" [formControl]="nationality"><br>
 
-    <label for="birth_id">Birth place: </label>
+    <label for="birth_id">Locul nasterii: </label>
     <input type="text" id="birth_id" [formControl]="birth"><br>
 
-    <label for="adress_id">Adress: </label>
-    <input type="text" id="adress_id" size="50" [formControl]="adress"><br>
 
-    <label for="issued_id">Issued by: </label>
+    <label>Adresa: </label>
+    <label>Judet</label>
+    <input type="text" [formControl]="county">
+    <label>Localitate/ Oras: </label>
+    <input type="text" [formControl]="city">
+    <label>Str: </label>
+    <input type="text" [formControl]="street">
+    <label>Nr: </label>
+    <input type="text" [formControl]="streetNr">
+    <label>Bl: </label>
+    <input type="text" [formControl]="block">
+    <label>Sc: </label>
+    <input type="text" [formControl]="scale">
+    <label>Et: </label>
+    <input type="text" [formControl]="floor">
+    <label>Ap: </label>
+    <input type="text" [formControl]="apartament"><br><br>
+
+    <label for="issued_id">Eliberat de: </label>
     <input type="text" id="issued_id" [formControl]="issued"><br>
 
-    <label for="valid_id">Valability: </label>
+    <label for="valid_id">Valabilitate: </label>
     <input type="date" id="valid_id" [formControl]="valid1">-
     <input type="date" [formControl]="valid2"><br>
-    
+
     <button type="button" (click)="update(persoana.cnp)">Update</button>
   </div>
 
