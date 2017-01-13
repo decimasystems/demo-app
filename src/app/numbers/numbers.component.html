@@ -1,11 +1,30 @@
 <form [formGroup]="myForm">
   <div>
-    <label for="no_id">Give a number:</label><br><br>
+    <label for="no_id">Introduceti Suma</label><br/>
     <input type="text" id="no_id" [formControl]="nr">
-    <br/><br/>
+    <select name="currency" [formControl]="currency">
+        <option value="RON">RON</option>
+        <option value="EUR">EUR</option>
+        <option value="USD">USD</option> 
+        <option value="GBP">GBP</option> 
+  </select>
+    <br/>
+    <label for="no_id">Simbol de ordin</label><br/>
+    <select name="orderdivider" [formControl]="orderdivider">
+      <option value=','>Virgula</option>
+      <option value='.'>Punct</option>
+    </select>
+    <br/>
+    <label for="no_id">Simbol zecimal</label><br/>
+    <select name="decdivider" [formControl]="decdivider">
+      <option value=','>Virgula</option>
+      <option value='.'>Punct</option>
+    </select>
+    <br/>
+    <label for="no_id">Whitespace </label> <input type="checkbox" [formControl]="separator" name="separator">
   </div>
 </form>
-
+<br/>
 <div role="alert" *ngIf="message">
-  <p> Conversion to romanian letters: {{ message }} </p>
+  <p> Conversia in litere romane: {{ message }} </p>
 </div>
