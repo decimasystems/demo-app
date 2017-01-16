@@ -25,8 +25,7 @@ const routes: Routes = [
     HomeComponent,
     AddComponent,
     NumbersComponent,
-    ListComponent,
-
+    ListComponent
 ],
 
   imports: [
