@@ -7,7 +7,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
   templateUrl: './numbers.component.html',
   styleUrls: ['./numbers.component.css']
 })
-export class NumbersComponent {
+export class NumbersComponent{
   message: string;
   nr: AbstractControl;
   myForm: FormGroup;

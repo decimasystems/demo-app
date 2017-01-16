@@ -1,0 +1,158 @@
+<form [formGroup]="myForm" *ngIf="myForm">
+    <p>
+        <label for="series_id">Serie card identitate: </label>
+        <input type="text" id="series_id" [formControl]="series">
+        <span *ngIf="submitted && series.hasError('validInput')">Trebuie sa contina doar cifre!</span>
+        <span *ngIf="submitted && series.hasError('validLength')">Trebuie sa contina doar 2 caractere!</span>
+    </p>
+
+    <p>
+        <label for="number_id">Numar: </label>
+        <input type="text" id="number_id" [formControl]="number">
+        <span *ngIf="submitted && number.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+        <span *ngIf="submitted && number.hasError('validLength6')">Trebuie sa contina doar 6 cifre!</span>
+    </p>
+
+    <p>
+        <label for="cnp_id">CNP: </label>
+        <input type="text" id="cnp_id" [formControl]="cnp">
+        <span *ngIf="submitted && cnp.hasError('codValid')">CNP invalid!</span>
+    </p>
+
+    <p>
+        <label for="lastname_id">Nume: </label>
+        <input type="text" id="lastname_id" [formControl]="lastName">
+        <span *ngIf="submitted && lastName.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
+
+    <p>
+        <label for="firstname_id">Prenume: </label>
+        <input type="text" id="firstname_id" [formControl]="firstName">
+        <span *ngIf="submitted && firstName.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
+
+    <p>
+        <label for="nationality_id">Nationalitate: </label>
+        <input type="text" id="nationality_id" [formControl]="nationality">
+        <span *ngIf="submitted && nationality.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
+
+    <p>
+        <label for="birth_id">Locul nasterii: </label>
+        <input type="text" id="birth_id" [formControl]="birth">
+        <span *ngIf="submitted && birth.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
+
+    <p>
+        <label>Adresa: </label>
+    </p>
+    <p>
+        <label>Judet</label>
+        <select name="county" [formControl]="county">
+            <option value="Alba">Alba</option>
+            <option value="Arad">Arad</option>
+            <option value="Arges">Arges</option>
+            <option value="Bacau">Bacau</option>
+            <option value="Bihor">Bihor</option>
+            <option value="Bistrita-Nasaud">Bistrita-Nasaud</option>
+            <option value="Botosani">Botosani</option>
+            <option value="Brasov">Brasov</option>
+            <option value="Braila">Braila</option>
+            <option value="Buzau">Buzau</option>
+            <option value="Caras-Severin">Caras-Severin</option>
+            <option value="Calarasi">Calarasi</option>
+            <option value="Cluj">Cluj</option>
+            <option value="Constanta">Constanta</option>
+            <option value="Covasna">Covasna</option>
+            <option value="Dambovita">Dambovita</option>
+            <option value="Dolj">Dolj</option>
+            <option value="Galati">Galati</option>
+            <option value="Giurgiu">Giurgiu</option>
+            <option value="Gorj">Gorj</option>
+            <option value="Harghita">Harghita</option>
+            <option value="Hunedoara">Hunedoara</option>
+            <option value="Ialomita">Ialomita</option>
+            <option value="Iasi">Iasi</option>
+            <option value="Ilfov">Ilfov</option>
+            <option value="Maramures">Maramures</option>
+            <option value="Mehedinti">Mehedinti</option>
+            <option value="Mures">Mures</option>
+            <option value="Neamt">Neamt</option>
+            <option value="Olt">Olt</option>
+            <option value="Prahova">Prahova</option>
+            <option value="Satu Mare">Satu Mare</option>
+            <option value="Salaj">Salaj</option>
+            <option value="Sibiu">Sibiu</option>
+            <option value="Suceava">Suceava</option>
+            <option value="Teleorman">Teleorman</option>
+            <option value="Timis">Timis</option>
+            <option value="Tulcea">Tulcea</option>
+            <option value="Vaslui">Vaslui</option>
+            <option value="Valcea">Valcea</option>
+            <option value="Vrancea">Vrancea</option>
+        </select>
+
+
+    </p>
+
+
+    <p>
+        <label>Localitate/ Oras: </label>
+        <input type="text" [formControl]="city">
+        <span *ngIf="submitted && city.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
+
+    <p>
+        <label>Str: </label>
+        <input type="text" [formControl]="street">
+        <span *ngIf="submitted">
+            <span *ngIf="submitted && street.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+        </span>
+    </p>
+
+    <p>
+        <label>Nr: </label>
+        <input type="text" [formControl]="streetNr">
+        <span *ngIf="submitted">
+            <span *ngIf="submitted && streetNr.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+        </span>
+    </p>
+
+    <p>
+        <label>Bl: </label>
+        <input type="text" [formControl]="block">
+    </p>
+
+    <p>
+        <label>Sc: </label>
+        <input type="text" [formControl]="scale">
+    </p>
+
+    <p>
+        <label>Et: </label>
+        <input type="text" [formControl]="floor">
+        <span *ngIf="submitted && floor.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+    </p>
+
+    <p>
+        <label>Ap: </label>
+        <input type="text" [formControl]="apartament">
+        <span *ngIf="submitted && apartament.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+    </p>
+
+    <p>
+        <label for="issued_id">Eliberat de: </label>
+        <input type="text" id="issued_id" [formControl]="issued">
+        <span *ngIf="submitted && issued.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+    </p>
+
+    <p>
+        <label for="validity_id">Valabilitate: </label>
+        <input type="date" id="validity_id" [formControl]="valid1">
+        <label for="valid2_id"> Pana la: </label>
+        <input type="date" id= "valid2_id" [formControl]="valid2">
+    </p>
+
+</form>
+
+<button type="button" (click)="addOrUpdateCnp()">Adaugati in lista</button>
