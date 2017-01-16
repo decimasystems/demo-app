@@ -21,7 +21,7 @@ export class NumbersComponent {
     this.myForm = fb.group({
       'nr': ['', Validators.required],
       'currency': ['RON', Validators.required],
-      'separator': [false, Validators.required],
+      'separator': [true, Validators.required],
       'decdivider': [',', Validators.required],
       'orderdivider': ['.', Validators.required]
     });
