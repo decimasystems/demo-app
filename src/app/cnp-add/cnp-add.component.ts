@@ -7,8 +7,8 @@ var _ = require('lodash');
 
 @Component({
     selector: 'add',
-    templateUrl: './add.component.html',
-    styleUrls: ['./add.component.css']
+    templateUrl: './cnp-add.component.html',
+    styleUrls: ['./cnp-add.component.css']
 })
 export class AddComponent {
     myForm: FormGroup;
@@ -100,7 +100,6 @@ export class AddComponent {
 
 
     addOrUpdateCnp() {
-        console.log('addOrUpdateCnp');
         this.submitted = true;
         var buletine: any[];
         var key: string = 'vector';
@@ -108,11 +107,7 @@ export class AddComponent {
         if (!buletine) {
             buletine = [];
         }
-        if (this.series.value && this.number.value && this.county.value &&
-            this.city.value && this.street.value && this.streetNr.value && this.block.value &&
-            this.scale.value && this.floor.value &&
-            this.apartament.value && this.birth.value && this.cnp.value && this.firstName.value && this.lastName.value && this.issued.value &&
-            this.nationality.value && this.valid1.value && this.valid2.value) {
+        if (this.myForm.valid) {
             buletine.push(this.myForm.value);
             localStorage.setItem(key, JSON.stringify(buletine));
             this.router.navigate(['list'])

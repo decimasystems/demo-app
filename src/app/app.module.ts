@@ -5,17 +5,16 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes,ActivatedRoute } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AddComponent } from './add/add.component';
+import { AddComponent } from './cnp-add/cnp-add.component';
 import { NumbersComponent } from './numbers/numbers.component';
-import { ListComponent } from './list/list.component';
-import { IdentityCardComponent } from './identitycard/identitycard.component';
+import { ListComponent } from './cnp-list/cnp-list.component';
+
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'numbers', component: NumbersComponent },
-  { path: 'identitycard', component: IdentityCardComponent },
   {path: 'list', component: ListComponent},
   {path:'add/:id', component: AddComponent}
 ];
@@ -27,8 +26,6 @@ const routes: Routes = [
     AddComponent,
     NumbersComponent,
     ListComponent,
-    
-    IdentityCardComponent,
 
 ],
 

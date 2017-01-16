@@ -1,5 +1,3 @@
-<h1>submitted: {{submitted}}</h1>
-<h2>{{lastName.hasError('invalidInput')}}</h2>
 <form [formGroup]="myForm" *ngIf="myForm">
     <p>
         <label for="series_id">Serie card identitate: </label>
@@ -42,7 +40,7 @@
     <p>
         <label for="birth_id">Locul nasterii: </label>
         <input type="text" id="birth_id" [formControl]="birth">
-        <span *ngIf="submitted && nationality.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && birth.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
     </p>
 
     <p>
@@ -50,21 +48,65 @@
     </p>
     <p>
         <label>Judet</label>
-        <input type="text" [formControl]="county">
+        <select name="county" [formControl]="county">
+            <option value="Alba">Alba</option>
+            <option value="Arad">Arad</option>
+            <option value="Arges">Arges</option>
+            <option value="Bacau">Bacau</option>
+            <option value="Bihor">Bihor</option>
+            <option value="Bistrita-Nasaud">Bistrita-Nasaud</option>
+            <option value="Botosani">Botosani</option>
+            <option value="Brasov">Brasov</option>
+            <option value="Braila">Braila</option>
+            <option value="Buzau">Buzau</option>
+            <option value="Caras-Severin">Caras-Severin</option>
+            <option value="Calarasi">Calarasi</option>
+            <option value="Cluj">Cluj</option>
+            <option value="Constanta">Constanta</option>
+            <option value="Covasna">Covasna</option>
+            <option value="Dambovita">Dambovita</option>
+            <option value="Dolj">Dolj</option>
+            <option value="Galati">Galati</option>
+            <option value="Giurgiu">Giurgiu</option>
+            <option value="Gorj">Gorj</option>
+            <option value="Harghita">Harghita</option>
+            <option value="Hunedoara">Hunedoara</option>
+            <option value="Ialomita">Ialomita</option>
+            <option value="Iasi">Iasi</option>
+            <option value="Ilfov">Ilfov</option>
+            <option value="Maramures">Maramures</option>
+            <option value="Mehedinti">Mehedinti</option>
+            <option value="Mures">Mures</option>
+            <option value="Neamt">Neamt</option>
+            <option value="Olt">Olt</option>
+            <option value="Prahova">Prahova</option>
+            <option value="Satu Mare">Satu Mare</option>
+            <option value="Salaj">Salaj</option>
+            <option value="Sibiu">Sibiu</option>
+            <option value="Suceava">Suceava</option>
+            <option value="Teleorman">Teleorman</option>
+            <option value="Timis">Timis</option>
+            <option value="Tulcea">Tulcea</option>
+            <option value="Vaslui">Vaslui</option>
+            <option value="Valcea">Valcea</option>
+            <option value="Vrancea">Vrancea</option>
+        </select>
+
+
     </p>
 
 
     <p>
         <label>Localitate/ Oras: </label>
         <input type="text" [formControl]="city">
-        <span *ngIf="submitted && firstName.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && city.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
     </p>
 
     <p>
         <label>Str: </label>
         <input type="text" [formControl]="street">
         <span *ngIf="submitted">
-            <span *ngIf="submitted && firstName.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+            <span *ngIf="submitted && street.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
         </span>
     </p>
 
@@ -72,7 +114,7 @@
         <label>Nr: </label>
         <input type="text" [formControl]="streetNr">
         <span *ngIf="submitted">
-            <span *ngIf="submitted && number.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+            <span *ngIf="submitted && streetNr.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
         </span>
     </p>
 
@@ -89,13 +131,13 @@
     <p>
         <label>Et: </label>
         <input type="text" [formControl]="floor">
-        <span *ngIf="submitted && number.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+        <span *ngIf="submitted && floor.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
     </p>
 
     <p>
         <label>Ap: </label>
         <input type="text" [formControl]="apartament">
-        <span *ngIf="submitted && number.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+        <span *ngIf="submitted && apartament.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
     </p>
 
     <p>

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 var _ = require('lodash');
 @Component({
     selector: 'list',
-    templateUrl: './list.component.html',
-    styleUrls: ['./list.component.css']
+    templateUrl: './cnp-list.component.html',
+    styleUrls: ['./cnp-list.component.css']
 })
 export class ListComponent implements OnInit {
     date: string[] = [];
