@@ -91,15 +91,17 @@
             <option value="Valcea">Valcea</option>
             <option value="Vrancea">Vrancea</option>
         </select>
-
-
     </p>
 
 
     <p>
         <label>Localitate/ Oras: </label>
+        <!--<span *ngFor="let l of localitati">
+            
+                {{l}}
+        </span>-->
         <input type="text" [formControl]="city">
-        <span *ngIf="submitted && city.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+         
     </p>
 
     <p>
@@ -150,7 +152,7 @@
         <label for="validity_id">Valabilitate: </label>
         <input type="date" id="validity_id" [formControl]="valid1">
         <label for="valid2_id"> Pana la: </label>
-        <input type="date" id= "valid2_id" [formControl]="valid2">
+        <input type="date" id="valid2_id" [formControl]="valid2">
     </p>
 
 </form>

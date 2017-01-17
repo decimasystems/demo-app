@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { AddComponent } from './cnp-add/cnp-add.component';
 import { NumbersComponent } from './numbers/numbers.component';
 import { ListComponent } from './cnp-list/cnp-list.component';
+import { SalaryComponent } from './salary/salary.component';
 
 
 
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'numbers', component: NumbersComponent },
   {path: 'list', component: ListComponent},
-  {path:'add/:id', component: AddComponent}
+  {path:'add/:id', component: AddComponent},
+  {path: 'salary', component:SalaryComponent}
 ];
 
 @NgModule({
@@ -25,7 +27,8 @@ const routes: Routes = [
     HomeComponent,
     AddComponent,
     NumbersComponent,
-    ListComponent
+    ListComponent,
+    SalaryComponent
 ],
 
   imports: [

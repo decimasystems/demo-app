@@ -1,0 +1,67 @@
+<form [formGroup]="myForm">
+  <label for="brut_id">Salariu brut: </label>
+  <input type="number" id="brut_id" [formControl]="salaryB">lei
+  <label for="net_id"> Salariu net: </label>
+  <input type="number" id="net_id" [formControl]="salaryN">lei
+  <label for="complet_id">Salariu complet: </label>
+  <input type="number" id="complet_id" [formControl]="salaryC">lei<br/> ___________________________________________________________
+  <br/>
+  <label>Impozite Angajat</label><br/>
+  <p> <label>CASa</label>
+    <input type="number" [formControl]="casaP" readonly>%
+    <input type="number" [formControl]="casa">lei
+  </p>
+
+  <p> <label>CASSa</label>
+    <input type="number" [formControl]="cassaP" readonly>%
+    <input type="number" [formControl]="cassa">lei
+  </p>
+  <p>
+    <label>CFSa</label>
+    <input type="number" [formControl]="cfsaP" readonly>%
+    <input type="number" [formControl]="cfsa">lei
+  </p>
+  <p>
+    <label>DP</label>
+    <input type="number" value="0"readonly>
+    <input type="number" [formControl]="dp">lei
+  </p>
+  <p>
+    <label>IV</label>
+    <input type="number" [formControl]="ivP" readonly>%
+    <input type="number" [formControl]="iv">lei
+  </p>
+  ___________________________________________________________<br/>
+  <label>Impozite Angajator</label><br/>
+  <p>
+    <label>CAS</label>
+    <input type="number" [formControl]="casP" readonly>%
+    <input type="number" [formControl]="cas">lei
+  </p>
+  <p>
+    <label>CASS</label>
+    <input type="number" [formControl]="cassP" readonly>%
+    <input type="number" [formControl]="cass">lei
+  </p>
+  <p>
+    <label>CFS</label>
+    <input type="number" [formControl]="cfsP" readonly>%
+    <input type="number" [formControl]="cfs">lei
+  </p>
+  <p>
+    <label>CCI</label>
+    <input type="number" [formControl]="cciP" readonly>%
+    <input type="number" [formControl]="cci">lei
+  </p>
+  <p>
+    <label>FGPCS</label>
+    <input type="number" [formControl]="fgpcsP" readonly>%
+    <input type="number" [formControl]="fgpcs">lei
+  </p>
+  <p>
+    <label>AMBP</label>
+    <input type="number" [formControl]="ambpP" readonly>%
+    <input type="number" [formControl]="ambp">lei
+  </p>
+
+</form>
