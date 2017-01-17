@@ -7,7 +7,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/fo
   templateUrl: './numbers.component.html',
   styleUrls: ['./numbers.component.css']
 })
-export class NumbersComponent {
+export class NumbersComponent{
   message: string;
   nr: AbstractControl;
   myForm: FormGroup;
@@ -21,7 +21,7 @@ export class NumbersComponent {
     this.myForm = fb.group({
       'nr': ['', Validators.required],
       'currency': ['RON', Validators.required],
-      'separator': [false, Validators.required],
+      'separator': [true, Validators.required],
       'decdivider': [',', Validators.required],
       'orderdivider': ['.', Validators.required]
     });
