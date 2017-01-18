@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms'
-//var pdfMake=require('pdfmake')
 import { CnpValidator } from '../cnp-add/cnp-validators'
+
+declare let pdfMake: any;
 
 @Component({
     selector: 'salary',
@@ -210,8 +211,8 @@ export class SalaryComponent implements OnInit {
 
     }
     genereaza() {
-        //var fluturas={content:'Salariu de baza'}
-        //pdfMake.createPdf(fluturas).open();
+        var fluturas={content:'Salariu de baza'}
+        pdfMake.createPdf(fluturas).open();
     }
 
 }
