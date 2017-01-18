@@ -9,7 +9,7 @@ var _ = require('lodash');
     templateUrl: './cnp-add.component.html',
     styleUrls: ['./cnp-add.component.css']
 })
-export class AddComponent { 
+export class AddComponent {
     myForm: FormGroup;
     cnp: AbstractControl;
     lastName: AbstractControl;
@@ -33,7 +33,7 @@ export class AddComponent {
     buletin: any[] = [];
     persoana: any;
     key: string = 'vector';
-    localitati:any[];
+    localitati: any[];
     submitted: boolean;
 
     constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
@@ -48,11 +48,10 @@ export class AddComponent {
                     this.persoana = {};
                 } else {
                     this.buletin = JSON.parse(localStorage.getItem(this.key))
-                    this.persoana = _.find(this.buletin, { 'cnp': this.id})
+                    this.persoana = _.find(this.buletin, { 'cnp': this.id })
                 }
                 this.buildForm();
-                 this.localitati=['Salcea','Plopeni','Solca','Gura-Humorului','Putna','Cacica','Buftea','Afumati','Chitila','Copaceni']
-    
+                this.localitati = [{ name: 'Suceava', comune: ['Salcea', 'Plopeni'] }, { name: 'Neamt', comune: ['Draguseni', 'bla bla'] }]
             }
         });
 

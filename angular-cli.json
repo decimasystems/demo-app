@@ -20,7 +20,10 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/pdfmake/build/pdfmake.min.js",
+        "../node_modules/pdfmake/build/vfs_fonts.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
