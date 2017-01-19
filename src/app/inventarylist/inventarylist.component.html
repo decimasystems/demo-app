@@ -1,0 +1,31 @@
+<h1>Lista Obiectelor de Inventar</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Nr. Crt.</th>
+      <th>Titlu</th>
+      <th>Descriere</th>
+      <th>U/M</th>
+      <th>Pret/buc.</th>
+      <th>Moneda</th>
+      <th>Nr. de Bucati</th>
+      <th>Perioada de Amortizare</th>
+      <th>Actiuni</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let i of inventary">
+    <td>{{i.nr}}</td>
+    <td>{{i.title}}</td>
+    <td>{{i.description}}</td>
+    <td>{{i.unit}}</td>
+    <td>{{i.price}}</td>
+    <td>{{i.currency}}</td>
+    <td>{{i.pieces}}</td>
+    <td>{{i.period}}</td>
+    <td>
+      <a [routerLink]="updateObject(i.nr)">Modifica</a>
+      <button type="button" (click)="deleteObject(i.nr)">Sterge</button>
+    </td>
+  </tr>
+</table>
+<a [routerLink]="updateObject('adauga')">Adauga</a>
