@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-var _ = require('lodash');
+import * as _ from 'lodash';
 @Component({
     selector: 'list',
     templateUrl: './cnp-list.component.html',

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { CnpValidator } from './cnp-validators';
-var _ = require('lodash');
+import * as _ from 'lodash';
 
 @Component({
     selector: 'add',

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-var _ = require('lodash');
+
+import * as _ from 'lodash';
+
+declare let pdfMake: any;
+
 @Component({
   selector: 'inventarylist',
   templateUrl: './inventarylist.component.html',
@@ -23,10 +27,15 @@ export class InventarylistComponent implements OnInit {
 
     var events = _.remove(this.inventary,
       i => {
-        return i.nr == nr;
+        return (i as any).nr == nr;
       });
     localStorage.setItem(this.key, JSON.stringify(this.inventary));
   }
+
+  print() {
+        var inventar={content:'Fisa de inventar'}
+        pdfMake.createPdf(inventar).open();
+    }
 
 }
 
