@@ -1,10 +1,10 @@
 <form [formGroup]="myForm">
   <label for="brut_id">Salariu brut: </label>
-  <input type="number" id="brut_id" [formControl]="salaryB">lei
+  <input type="text" id="brut_id" [formControl]="salaryB">lei
   <label for="net_id"> Salariu net: </label>
-  <input type="number" id="net_id" [formControl]="salaryN" >lei
+  <input type="text" id="net_id" [formControl]="salaryN" >lei
   <label for="complet_id">Salariu complet: </label>
-  <input type="number" id="complet_id" [formControl]="salaryC">lei<br/>
+  <input type="text" id="complet_id" [formControl]="salaryC">lei<br/>
   <hr/>
   <table>
     <tr>
@@ -13,18 +13,18 @@
     <tr>
       <td>Asigurari Sociale (CASa)</td>
       <td><input type="text" size="1" [formControl]="casaP">%</td>
-      <td> <input type="number" [formControl]="casa">lei</td>
+      <td> <input type="text" [formControl]="casa">lei</td>
     </tr>
     <tr>
       <td>Asigurari Sociale de Sanatate (CASSa)</td>
       <td><input type="text" size="1"[formControl]="cassaP">%</td>
-      <td> <input type="number" [formControl]="cassa">lei</td>
+      <td> <input type="text" [formControl]="cassa">lei</td>
       <td>
     </tr>
     <tr>
       <td>Fondul de Somaj (CFSa)</td>
       <td> <input type="text" size="1" [formControl]="cfsaP">%</td>
-      <td> <input type="number" [formControl]="cfsa">lei</td>
+      <td> <input type="text" [formControl]="cfsa">lei</td>
     </tr>
     <tr>
       <td>Deducere Personala (DP)</td>
@@ -35,12 +35,12 @@
       <option value="600">3</option>
       <option value="800">4+</option>
     </select></td>
-      <td> <input type="number" [formControl]="dp">lei</td>
+      <td> <input type="text" [formControl]="dp">lei</td>
     </tr>
     <tr>
       <td>Impozit pe venit (IV)</td>
       <td> <input type="text" size="1" [formControl]="ivP">%</td>
-      <td><input type="number" [formControl]="iv">lei</td>
+      <td><input type="text" [formControl]="iv">lei</td>
 
     </tr>
 
@@ -51,32 +51,32 @@
     <tr>
       <td>Asigurari Sociale (CAS)</td>
       <td> <input type="text" size="1" [formControl]="casP">%</td>
-      <td><input type="number" [formControl]="cas">lei</td>
+      <td><input type="text" [formControl]="cas">lei</td>
     </tr>
     <tr>
       <td>Asigurari Sociale de Sanate (CASS)</td>
       <td> <input type="text" size="1" [formControl]="cassP">%</td>
-      <td><input type="number" [formControl]="cass">lei</td>
+      <td><input type="text" [formControl]="cass">lei</td>
     </tr>
     <tr>
       <td>Fondul de Somaj (CFS)</td>
       <td><input type="text" size="1" [formControl]="cfsP">%</td>
-      <td> <input type="number" [formControl]="cfs">lei</td>
+      <td> <input type="text" [formControl]="cfs">lei</td>
     </tr>
     <tr>
       <td>Concedii si Indemnizatii (CCI)</td>
       <td><input type="text" size="1" [formControl]="cciP">%</td>
-      <td> <input type="number" [formControl]="cci">lei</td>
+      <td> <input type="text" [formControl]="cci">lei</td>
     </tr>
     <tr>
       <td>Creante Salariale (FGPCS)</td>
       <td><input type="text" size="1" [formControl]="fgpcsP">%</td>
-      <td><input type="number" [formControl]="fgpcs">lei</td>
+      <td><input type="text" [formControl]="fgpcs">lei</td>
     </tr>
     <tr>
       <td>Fondul de Risc si Accidente (AMBP)</td>
       <td><input type="text" size="1" [formControl]="ambpP">%</td>
-      <td><input type="number" [formControl]="ambp">lei</td>
+      <td><input type="text" [formControl]="ambp">lei</td>
     </tr>
     <hr/>
     <tr>
@@ -86,34 +86,34 @@
     <tr>
       <td>Norma lunara</td>
       <td></td>
-      <td><input type="number" [formControl]="nl">ore</td>
+      <td><input type="text" [formControl]="nl">ore</td>
     </tr>
     <tr>
       <td>Total ore lucrate</td>
       <td></td>
-      <td><input type="number" [formControl]="tl">ore</td>
+      <td><input type="text" [formControl]="tl">ore</td>
     </tr>
 
     <tr>
       <td>Spor ore suplimentare</td>
       <td></td>
-      <td><input type="number" [formControl]="ss">%</td>
+      <td><input type="text" [formControl]="ss">%</td>
     </tr>
 
     <tr>
       <td>Bonusuri</td>
       <td></td>
-      <td><input type="number">lei</td>
+      <td><input type="text">lei</td>
     </tr>
     <tr>
       <td>Sporuri</td>
       <td></td>
-      <td><input type="number">lei</td>
+      <td><input type="text">lei</td>
     </tr>
     <tr>
       <td>Retineri (din salariul net)</td>
       <td></td>
-      <td><input type="number" [formControl]="retineri">lei</td>
+      <td><input type="text" [formControl]="retineri">lei</td>
     </tr>
     <tr>
       <td>Nume angajat</td>
