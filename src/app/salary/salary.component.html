@@ -1,0 +1,138 @@
+<form [formGroup]="myForm">
+  <label for="brut_id">Salariu brut: </label>
+  <input type="number" id="brut_id" [formControl]="salaryB">lei
+  <label for="net_id"> Salariu net: </label>
+  <input type="number" id="net_id" [formControl]="salaryN" >lei
+  <label for="complet_id">Salariu complet: </label>
+  <input type="number" id="complet_id" [formControl]="salaryC">lei<br/>
+  <hr/>
+  <table>
+    <tr>
+      <td rowspan="6">Impozite Angajat</td>
+    </tr>
+    <tr>
+      <td>Asigurari Sociale (CASa)</td>
+      <td><input type="text" size="1" [formControl]="casaP">%</td>
+      <td> <input type="number" [formControl]="casa">lei</td>
+    </tr>
+    <tr>
+      <td>Asigurari Sociale de Sanatate (CASSa)</td>
+      <td><input type="text" size="1"[formControl]="cassaP">%</td>
+      <td> <input type="number" [formControl]="cassa">lei</td>
+      <td>
+    </tr>
+    <tr>
+      <td>Fondul de Somaj (CFSa)</td>
+      <td> <input type="text" size="1" [formControl]="cfsaP">%</td>
+      <td> <input type="number" [formControl]="cfsa">lei</td>
+    </tr>
+    <tr>
+      <td>Deducere Personala (DP)</td>
+      <td><select [formControl]="dpp">
+      <option value="300">0</option>
+      <option value="400">1</option>
+      <option value="500">2</option>
+      <option value="600">3</option>
+      <option value="800">4+</option>
+    </select></td>
+      <td> <input type="number" [formControl]="dp">lei</td>
+    </tr>
+    <tr>
+      <td>Impozit pe venit (IV)</td>
+      <td> <input type="text" size="1" [formControl]="ivP">%</td>
+      <td><input type="number" [formControl]="iv">lei</td>
+
+    </tr>
+
+    <hr/>
+    <tr>
+      <td rowspan="7">Impozite Angajator</td>
+    </tr>
+    <tr>
+      <td>Asigurari Sociale (CAS)</td>
+      <td> <input type="text" size="1" [formControl]="casP">%</td>
+      <td><input type="number" [formControl]="cas">lei</td>
+    </tr>
+    <tr>
+      <td>Asigurari Sociale de Sanate (CASS)</td>
+      <td> <input type="text" size="1" [formControl]="cassP">%</td>
+      <td><input type="number" [formControl]="cass">lei</td>
+    </tr>
+    <tr>
+      <td>Fondul de Somaj (CFS)</td>
+      <td><input type="text" size="1" [formControl]="cfsP">%</td>
+      <td> <input type="number" [formControl]="cfs">lei</td>
+    </tr>
+    <tr>
+      <td>Concedii si Indemnizatii (CCI)</td>
+      <td><input type="text" size="1" [formControl]="cciP">%</td>
+      <td> <input type="number" [formControl]="cci">lei</td>
+    </tr>
+    <tr>
+      <td>Creante Salariale (FGPCS)</td>
+      <td><input type="text" size="1" [formControl]="fgpcsP">%</td>
+      <td><input type="number" [formControl]="fgpcs">lei</td>
+    </tr>
+    <tr>
+      <td>Fondul de Risc si Accidente (AMBP)</td>
+      <td><input type="text" size="1" [formControl]="ambpP">%</td>
+      <td><input type="number" [formControl]="ambp">lei</td>
+    </tr>
+    <hr/>
+    <tr>
+      <td rowspan="10">Calcul salariu</td>
+     
+    </tr>
+    <tr>
+      <td>Norma lunara</td>
+      <td></td>
+      <td><input type="number" [formControl]="nl">ore</td>
+    </tr>
+    <tr>
+      <td>Total ore lucrate</td>
+      <td></td>
+      <td><input type="number" [formControl]="tl">ore</td>
+    </tr>
+
+    <tr>
+      <td>Spor ore suplimentare</td>
+      <td></td>
+      <td><input type="number" [formControl]="ss">%</td>
+    </tr>
+
+    <tr>
+      <td>Bonusuri</td>
+      <td></td>
+      <td><input type="number">lei</td>
+    </tr>
+    <tr>
+      <td>Sporuri</td>
+      <td></td>
+      <td><input type="number">lei</td>
+    </tr>
+    <tr>
+      <td>Retineri (din salariul net)</td>
+      <td></td>
+      <td><input type="number" [formControl]="retineri">lei</td>
+    </tr>
+    <tr>
+      <td>Nume angajat</td>
+      <td></td>
+      <td> <input type="text" [formControl]="numeA"></td>
+    </tr>
+    <tr>
+      <td>Nume firma</td>
+      <td></td>
+      <td><input type="text" [formControl]="numeF"></td>
+    </tr>
+    <tr>
+      <td>Luna</td>
+      <td></td>
+      <td><select [formControl]="luna">
+    <option *ngFor="let l of luni" value="l">{{l}}</option>
+  </select></td>
+     
+    </tr>
+    <tr> <td> <button type="button" (click)="genereaza()">Genereaza fluturas de salariu</button></td></tr>
+  </table>
+</form>

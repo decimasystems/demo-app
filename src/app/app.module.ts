@@ -10,6 +10,8 @@ import { NumbersComponent } from './numbers/numbers.component';
 import { ListComponent } from './cnp-list/cnp-list.component';
 import { InventaryobjectsComponent } from './inventaryobjects/inventaryobjects.component';
 import { InventarylistComponent } from './inventarylist/inventarylist.component';
+import { SalaryComponent } from './salary/salary.component';
+
 
 
 export const routes: Routes = [
@@ -20,6 +22,7 @@ export const routes: Routes = [
   { path: 'add/:id', component: AddComponent },
   { path: 'inventaryobjects/:id', component: InventaryobjectsComponent },
   { path: 'inventarylist', component: InventarylistComponent },
+  {path: 'salary', component:SalaryComponent}
 ];
 
 @NgModule({
@@ -30,7 +33,8 @@ export const routes: Routes = [
     NumbersComponent,
     ListComponent,
     InventaryobjectsComponent,
-  	InventarylistComponent
+  	InventarylistComponent,
+     SalaryComponent
   ],
 
   imports: [

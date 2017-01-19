@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { CnpValidator } from './cnp-validators';
-
 var _ = require('lodash');
 
 @Component({
@@ -34,7 +33,7 @@ export class AddComponent {
     buletin: any[] = [];
     persoana: any;
     key: string = 'vector';
-
+    localitati: any[];
     submitted: boolean;
 
     constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
@@ -49,11 +48,13 @@ export class AddComponent {
                     this.persoana = {};
                 } else {
                     this.buletin = JSON.parse(localStorage.getItem(this.key))
-                    this.persoana = _.find(this.buletin, { 'cnp': this.id})
+                    this.persoana = _.find(this.buletin, { 'cnp': this.id })
                 }
                 this.buildForm();
+                this.localitati = [{ name: 'Suceava', comune: ['Salcea', 'Plopeni'] }, { name: 'Neamt', comune: ['Draguseni', 'bla bla'] }]
             }
         });
+
     }
     buildForm() {
         this.myForm = this.fb.group({
