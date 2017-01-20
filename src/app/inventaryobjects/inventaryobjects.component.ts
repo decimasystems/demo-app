@@ -42,7 +42,7 @@ export class InventaryobjectsComponent implements OnInit {
                     this.inventary = JSON.parse(localStorage.getItem('inv'));
                     console.log(this.inventary);
                     this.element = _.find(this.inventary, { 'nr': +this.id });
-                     console.log(this.element);
+                    console.log(this.element);
                 }
                 this.buildForm();
             }
