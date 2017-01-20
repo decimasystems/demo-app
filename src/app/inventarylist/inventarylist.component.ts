@@ -39,47 +39,47 @@ export class InventarylistComponent implements OnInit {
 
         var inventar = {
             content: [
-               
-               {
+
+                {
                     style: 'tableHeader',
                     table: {
+                        widths: [200, 160, '*', 34],
                         body: [
-                            [{ colSpan: 4, text: 'Unitatea:................................ ', alignment: 'center' },
-                            { text: ' ', alignment: 'center' },
-                            { text: ' ', alignment: 'center' },
-                            { text: ' ', alignment: 'center' },
-                            { text: 'Fisa de inventariere', alignment: 'left' },
-                            { colSpan: 4, width: 200, text: '.....................................', alignment: 'center', color: 'white' },
-                            { text: ' ', alignment: 'center' },
-                            { text: ' ', alignment: 'center' },
-                            { text: ' ', alignment: 'center' },
-                            { text: ' ', alignment: 'center' }
+
+                            [{ text: 'Unitatea: ', alignment: 'left' }, { text: 'Fisa de inventariere', alignment: 'left' }, { text: '' }, { text: '' }
                             ],
-                            [{ colSpan: 4, text: ' ', alignment: 'center' },
-                            { text: '', alignment: 'center' },
-                            { text: ' ', alignment: 'center' },
-                            { text: '', alignment: 'center' },
-                            { text: 'Data.................... ', alignment: 'center' },
-                            { colSpan: 4, text: '', alignment: 'center' },
-                            { text: '', alignment: 'center' },
-                            { text: ' ', alignment: 'center' },
-                            { text: '', alignment: 'center' },
-                            { text: '.................', alignment: 'center', color: 'white' }
+                            [{ text: '' }, { text: 'Data: ', alignment: 'left' }, { text: '' }, { text: '' }
                             ],
                         ]
                     }
-                    
+
                 },
-                 { text: 'Dynamic parts', style: 'header' },
-                 table(this.inventary,['nr', 'title', 'description', 'unit', 'price', 'currency', 'pieces', 'period'])
+
+                {
+                    style: 'listHeader',
+                    table: {
+                        widths: [20, 100, '*', 34, '*', 45, '*', 55],
+                        body: [
+                            [{ text: 'Nr. Crt' }, { text: 'Titlu' }, { text: 'Descriere' }, { text: 'U/M' }, { text: 'Pret/buc.' }, { text: 'Moneda' }, { text: 'Nr. de Bucati' }, { text: 'Perioada de Amortizare' }],
+                        ]
+                    }
+                },
+                [table(this.inventary)]
+
+
             ],
             styles: {
 
                 tableHeader: {
                     bold: true,
                     fontSize: 13,
-                    color: 'black',
+                    color: 'black'
+                },
 
+                listHeader: {
+                    bold: true,
+                    fontSize: 10,
+                    color: 'black',
                 }
             }
         };
@@ -89,28 +89,31 @@ export class InventarylistComponent implements OnInit {
 
 }
 
-function buildTableBody(data, columns) {
+function buildTableBody(data) {
     var body = [];
-
-    body.push(columns);
+    var columns = ['nr', 'title', 'description', 'unit', 'price', 'currency', 'pieces', 'period'];
+    body.push();
 
     data.forEach(function(row) {
         var dataRow = [];
 
         columns.forEach(function(column) {
             dataRow.push(row[column].toString());
+
         })
+
         body.push(dataRow);
     });
 
     return body;
 }
 
-function table(data, columns) {
+function table(data) {
     return {
         table: {
-            headerRows: 8,
-            body: buildTableBody(data, columns)
-        }
+            widths: [20, 100, '*', 34, '*', 45, '*', 55],
+            body: buildTableBody(data)
+        },
+
     };
 }
