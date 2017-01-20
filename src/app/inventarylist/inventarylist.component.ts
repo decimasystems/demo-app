@@ -33,9 +33,20 @@ export class InventarylistComponent implements OnInit {
         localStorage.setItem(this.key, JSON.stringify(this.inventary));
     }
 
+    buildRows() {
+        var rez = [];
+        rez.push([{ colSpan: 3, text: 'Unitatea: ', alignment: 'left' }, { text: '' }, { text: '' }, { colSpan: 3, text: 'Fisa de inventariere', alignment: 'left' }, { text: '' }, { colSpan: 2, text: '' }, { text: '' }, { text: '' }], );
+        rez.push([{ colSpan: 3, text: '' }, { text: '' }, { text: '' }, { colSpan: 3, text: 'Data: ', alignment: 'left' }, { text: '' }, { colSpan: 2, text: '' }, { text: '' }, { text: '' }]);
+        rez.push([{ text: 'Nr. Crt' }, { colSpan: 2, text: 'Descriere', alignment: 'center' }, {}, { text: 'U/M' }, { colSpan: 2, text: 'Pret unitar' }, {}, { text: 'Stocuri' }, { text: 'Perioada de Amortizare' }]);
+        for (var i = 0; i < this.inventary.length; i++) {
+            var x = this.inventary[i] as any;
+            var row = [{ text: x.nr }, { colSpan: 2, text: x.title + ' ' + x.description }, {}, { text: x.unit }, { colSpan: 2, text: x.price + ' ' + x.currency }, {}, { text: x.pieces }, { text: x.period }];
+            rez.push(row);
+        }
+        return rez;
+    }
+
     print() {
-        this.inventary = JSON.parse(localStorage.getItem(this.key));
-        console.log(this.inventary);
 
         var inventar = {
             content: [
@@ -43,31 +54,13 @@ export class InventarylistComponent implements OnInit {
                 {
                     style: 'tableHeader',
                     table: {
-                        widths: [200, 160, '*', 34],
-                        body: [
-
-                            [{ text: 'Unitatea: ', alignment: 'left' }, { text: 'Fisa de inventariere', alignment: 'left' }, { text: '' }, { text: '' }
-                            ],
-                            [{ text: '' }, { text: 'Data: ', alignment: 'left' }, { text: '' }, { text: '' }
-                            ],
-                        ]
+                        widths: [20, 100, '*', 34, '*', 50, '*', 60],
+                        body: this.buildRows()
                     }
 
                 },
-
-                {
-                    style: 'listHeader',
-                    table: {
-                        widths: [20, 100, '*', 34, '*', 45, '*', 55],
-                        body: [
-                            [{ text: 'Nr. Crt' }, { text: 'Titlu' }, { text: 'Descriere' }, { text: 'U/M' }, { text: 'Pret/buc.' }, { text: 'Moneda' }, { text: 'Nr. de Bucati' }, { text: 'Perioada de Amortizare' }],
-                        ]
-                    }
-                },
-                [table(this.inventary)]
-
-
             ],
+
             styles: {
 
                 tableHeader: {
@@ -80,40 +73,16 @@ export class InventarylistComponent implements OnInit {
                     bold: true,
                     fontSize: 10,
                     color: 'black',
-                }
+                    border: null,
+                },
+
             }
         };
 
         pdfMake.createPdf(inventar).open();
     }
-
 }
 
-function buildTableBody(data) {
-    var body = [];
-    var columns = ['nr', 'title', 'description', 'unit', 'price', 'currency', 'pieces', 'period'];
-    body.push();
 
-    data.forEach(function(row) {
-        var dataRow = [];
 
-        columns.forEach(function(column) {
-            dataRow.push(row[column].toString());
 
-        })
-
-        body.push(dataRow);
-    });
-
-    return body;
-}
-
-function table(data) {
-    return {
-        table: {
-            widths: [20, 100, '*', 34, '*', 45, '*', 55],
-            body: buildTableBody(data)
-        },
-
-    };
-}
