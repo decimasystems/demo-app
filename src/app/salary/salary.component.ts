@@ -28,22 +28,28 @@ export class SalaryComponent implements OnInit {
     ambp: AbstractControl;
     casaP: AbstractControl;
     cfsaP: AbstractControl;
-    ivP: AbstractControl
+    ivP: AbstractControl;
     casP: AbstractControl;
-    cassP: AbstractControl
-    cfsP: AbstractControl
-    cciP: AbstractControl
-    fgpcsP: AbstractControl
-    ambpP: AbstractControl
-    dpp: AbstractControl
-    nl: AbstractControl
-    tl: AbstractControl
-    ss: AbstractControl
-    retineri: AbstractControl
-    numeA: AbstractControl
-    numeF: AbstractControl
-    luna: AbstractControl
-    luni: any = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie']
+    cassP: AbstractControl;
+    cfsP: AbstractControl;
+    cciP: AbstractControl;
+    fgpcsP: AbstractControl;
+    ambpP: AbstractControl;
+    dpp: AbstractControl;
+    nl: AbstractControl;
+    tl: AbstractControl;
+    ss: AbstractControl;
+    retineri: AbstractControl;
+    numeA: AbstractControl;
+    numeF: AbstractControl;
+    luna: AbstractControl;
+    luni: any = ['ianuarie', 'februarie', 'martie', 'aprilie', 'mai', 'iunie', 'iulie', 'august', 'septembrie', 'octombrie', 'noiembrie', 'decembrie'];
+    bonusuri: AbstractControl;
+    sporuri: AbstractControl;
+    salary: AbstractControl;
+    y: any;
+    supliment: any;
+    deducere: any[] = [{ nume: '0', valoare: '300' }, { nume: '1', valoare: '400' }, { nume: '2', valoare: '500' }, { nume: '3', valoare: '600' }, { nume: '4+', valoare: '800' }];
     constructor(private fb: FormBuilder) {
     }
 
@@ -80,8 +86,15 @@ export class SalaryComponent implements OnInit {
             'retineri': ['', Validators.required],
             'numeA': ['', Validators.required],
             'numeF': ['', Validators.required],
-            'luna': ['', Validators.required]
+            'luna': ['', Validators.required],
+            'sporuri': ['', Validators.required],
+            'bonusuri': ['', Validators.required],
+            'salary': ['', Validators.required]
         });
+
+        this.salary = this.myForm.controls['salary']
+        this.sporuri = this.myForm.controls['sporuri']
+        this.bonusuri = this.myForm.controls['bonusuri']
         this.tl = this.myForm.controls['tl']
         this.nl = this.myForm.controls['nl']
         this.ss = this.myForm.controls['ss']
@@ -109,87 +122,93 @@ export class SalaryComponent implements OnInit {
         this.cfsaP = this.myForm.controls['cfsaP'];
         this.ivP = this.myForm.controls['ivP'];
         this.casP = this.myForm.controls['casP'];
-        this.cassP = this.myForm.controls['cassP']
-        this.cfsP = this.myForm.controls['cfsP']
-        this.cciP = this.myForm.controls['cciP']
-        this.fgpcsP = this.myForm.controls['fgpcsP']
-        this.ambpP = this.myForm.controls['ambpP']
-        this.salaryB.valueChanges.subscribe(
+        this.cassP = this.myForm.controls['cassP'];
+        this.cfsP = this.myForm.controls['cfsP'];
+        this.cciP = this.myForm.controls['cciP'];
+        this.fgpcsP = this.myForm.controls['fgpcsP'];
+        this.ambpP = this.myForm.controls['ambpP'];
+        this.salaryB.valueChanges.subscribe((value) => this.salary.patchValue(value));
+        this.salary.valueChanges.subscribe(
             (value) => {
                 this.dp.patchValue(this.computeDp(value, this.dpp.value));
-                this.patchFloatValue(value, 'casaP','casa');
-                this.patchFloatValue(value, 'cassaP','cassa');
-                this.patchFloatValue(value, 'cfsaP','cfsa');
-                this.patchFloatValue(value, 'ivP','iv');
-                this.patchFloatValue(value, 'casP','cas');
-                this.patchFloatValue(value, 'cassP','cass');
-                this.patchFloatValue(value, 'cfsP','cfs');
-                this.patchFloatValue(value, 'cciP','cci');
-                this.patchFloatValue(value, 'fgpcsP','fgpcs');
-                this.patchFloatValue(value, 'ambpP','ambp');
+                this.patchFloatValue(value, 'casaP', 'casa');
+                this.patchFloatValue(value, 'cassaP', 'cassa');
+                this.patchFloatValue(value, 'cfsaP', 'cfsa');
+                this.patchFloatValue(value, 'ivP', 'iv');
+                this.patchFloatValue(value, 'casP', 'cas');
+                this.patchFloatValue(value, 'cassP', 'cass');
+                this.patchFloatValue(value, 'cfsP', 'cfs');
+                this.patchFloatValue(value, 'cciP', 'cci');
+                this.patchFloatValue(value, 'fgpcsP', 'fgpcs');
+                this.patchFloatValue(value, 'ambpP', 'ambp');
                 this.iv.patchValue(((value - this.casa.value - this.cassa.value - this.cfsa.value - this.dp.value) * this.ivP.value * 0.01).toFixed(2))
                 this.salaryN.patchValue((value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value).toFixed(2))
-                var y=(+value + +this.cas.value + +this.cass.value + +this.cfs.value + +this.cci.value + +this.fgpcs.value + +this.ambp.value).toFixed(2);
-                this.salaryC.patchValue(y);
-
-                this.ss.patchValue((value / this.nl.value) * (this.tl.value - this.nl.value) * (this.ss.value + 100) / 100)
-            })
+                this.salaryC.patchValue((+value + +this.cas.value + +this.cass.value + +this.cfs.value + +this.cci.value + +this.fgpcs.value + +this.ambp.value).toFixed(2));
+                this.y = value;
+            });
         this.dp.valueChanges.subscribe(
             (value) => {
-                this.iv.patchValue((this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - value) * this.ivP.value * 0.01, true)
-                this.salaryN.patchValue(this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value, true)
-            })
+                this.iv.patchValue(((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - value) * this.ivP.value * 0.01).toFixed(2))
+                this.salaryN.patchValue((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value).toFixed(2))
+            });
         this.casaP.valueChanges.subscribe((value) => {
-            this.casa.patchValue(this.salaryB.value * value * 0.01, true)
-            this.iv.patchValue((this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - this.dp.value) * this.ivP.value * 0.01, true)
-            this.salaryN.patchValue(this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value, true)
-        })
+            this.casa.patchValue((this.salary.value * value * 0.01).toFixed(2))
+            this.iv.patchValue(((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.dp.value) * this.ivP.value * 0.01).toFixed(2))
+            this.salaryN.patchValue((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value).toFixed(2))
+        });
         this.cassaP.valueChanges.subscribe((value) => {
-            this.cassa.patchValue(this.salaryB.value * value * 0.01, true)
-            this.iv.patchValue((this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - this.dp.value) * this.ivP.value * 0.01, true)
-            this.salaryN.patchValue(this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value, true)
-        })
+            this.cassa.patchValue((this.salary.value * value * 0.01).toFixed(2))
+            this.iv.patchValue(((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.dp.value) * this.ivP.value * 0.01).toFixed(2))
+            this.salaryN.patchValue((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value).toFixed(2))
+        });
         this.cfsaP.valueChanges.subscribe((value) => {
-            this.cfsa.patchValue(this.salaryB.value * value * 0.01, true)
-            this.iv.patchValue((this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - this.dp.value) * this.ivP.value * 0.01, true)
-            this.salaryN.patchValue(this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value, true)
-        })
+            this.cfsa.patchValue((this.salary.value * value * 0.01).toFixed(2))
+            this.iv.patchValue(((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.dp.value) * this.ivP.value * 0.01).toFixed(2))
+            this.salaryN.patchValue((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value).toFixed(2))
+        });
         this.dp.valueChanges.subscribe((value) => {
-            this.iv.patchValue((this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - value) * this.ivP.value * 0.01, true)
-            this.salaryN.patchValue(this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value, true)
-        })
+            this.iv.patchValue(((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - value) * this.ivP.value * 0.01).toFixed(2))
+            this.salaryN.patchValue((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value).toFixed(2))
+        });
         this.ivP.valueChanges.subscribe((value) => {
-            this.iv.patchValue((this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - this.dp.value) * value * 0.01, true)
-            this.salaryN.patchValue(this.salaryB.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value, true)
-        })
+            this.iv.patchValue(((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.dp.value) * value * 0.01).toFixed(2))
+            this.salaryN.patchValue((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value).toFixed(2))
+        });
         this.casP.valueChanges.subscribe((value) => {
-            this.cas.patchValue(this.salaryB.value * value * 0.01, true)
-            this.salaryC.patchValue(this.salaryB.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value)
-        })
+            this.cas.patchValue((this.salary.value * value * 0.01).toFixed(2))
+            this.salaryC.patchValue((this.salary.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value).toFixed(2))
+        });
         this.cassP.valueChanges.subscribe((value) => {
-            this.cass.patchValue(this.salaryB.value * value * 0.01, true)
-            this.salaryC.patchValue(this.salaryB.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value)
-        })
+            this.cass.patchValue((this.salary.value * value * 0.01).toFixed(2))
+            this.salaryC.patchValue((this.salary.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value).toFixed(2))
+        });
         this.cfsP.valueChanges.subscribe((value) => {
-            this.cfs.patchValue(this.salaryB.value * value * 0.01, true)
-            this.salaryC.patchValue(this.salaryB.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value)
-        })
+            this.cfs.patchValue((this.salary.value * value * 0.01).toFixed(2))
+            this.salaryC.patchValue((this.salaryB.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value).toFixed(2))
+        });
         this.cciP.valueChanges.subscribe((value) => {
-            this.cci.patchValue(this.salaryB.value * value * 0.01, true)
-            this.salaryC.patchValue(this.salaryB.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value)
-        })
+            this.cci.patchValue((this.salary.value * value * 0.01).toFixed(2))
+            this.salaryC.patchValue((this.salary.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value).toFixed(2))
+        });
         this.fgpcsP.valueChanges.subscribe((value) => {
-            this.fgpcs.patchValue(this.salaryB.value * value * 0.01, true)
-            this.salaryC.patchValue(this.salaryB.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value)
-        })
+            this.fgpcs.patchValue((this.salary.value * value * 0.01).toFixed(2))
+            this.salaryC.patchValue((this.salary.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value).toFixed(2))
+        });
         this.ambpP.valueChanges.subscribe((value) => {
-            this.ambp.patchValue(this.salaryB.value * value * 0.01)
-            this.salaryC.patchValue(this.salaryB.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value)
-        })
+            this.ambp.patchValue((this.salary.value * value * 0.01).toFixed(2))
+            this.salaryC.patchValue((this.salary.value + this.cas.value + this.cass.value + this.cfs.value + this.cci.value + this.fgpcs.value + this.ambp.value).toFixed(2))
+        });
         this.dpp.valueChanges.subscribe((value) => {
-            this.dp.patchValue(this.computeDp(this.salaryB.value, value))
-        })
+            this.dp.patchValue(this.computeDp(this.salary.value, value))
+        });
 
+        this.ss.valueChanges.subscribe((value) => {
+            this.supliment = (+this.salaryB.value / +this.nl.value) * (+this.tl.value - +this.nl.value) * (+value + 100) / 100;
+            this.salary.patchValue((+this.salaryB.value + (+this.supliment)).toFixed(2))
+        });
+        this.bonusuri.valueChanges.subscribe((value) => this.salary.patchValue((+this.salaryB.value + +value + +this.supliment).toFixed(2)))
+        this.sporuri.valueChanges.subscribe((value) => this.salary.patchValue((+this.salaryB.value + +value + +this.supliment + +this.bonusuri.value).toFixed(2)));
+        this.retineri.valueChanges.subscribe((value) => this.salaryN.patchValue((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value - value).toFixed(2)));
     }
     computeDp(salary, dppval) {
         var s;
@@ -204,14 +223,75 @@ export class SalaryComponent implements OnInit {
         dpval = Math.ceil(dpval / 10) * 10
         return dpval
     }
-    patchFloatValue(value, percentControlName: string,valueControlName:string) {
-        var percent = this.myForm.controls[percentControlName].value*0.01;
-        var x=(value*percent).toFixed(2);
+    patchFloatValue(value, percentControlName: string, valueControlName: string) {
+        var percent = this.myForm.controls[percentControlName].value * 0.01;
+        var x = (value * percent).toFixed(2);
         this.myForm.controls[valueControlName].patchValue(x, true);
 
     }
     genereaza() {
-        var fluturas={content:'Salariu de baza'}
+        var x: any;
+        x = this.myForm.value;
+        x.os = ((+x.salaryB / +x.nl) * (+x.tl - +x.nl) * (+x.ss + 100) / 100).toFixed(2);
+        x.taxe = (+x.cassa + +x.cfsa + +x.casa + +x.dpp + +x.iv).toFixed(2);
+        var fluturas = {
+            content: [
+                {
+                    style: 'tableHeader',
+                    table: {
+                        body: [
+                            ['Nume Firma', x.luna + '/2017'],
+                            [x.numeF, '']
+                        ]
+                    }
+                },
+
+                {
+                    style: 'tableExample',
+                    table: {
+                        body: [
+                            ['Salariat: \n Nume Prenume', '', { alignment: 'right', text: x.numeA }],
+                            ['', '', { alignment: 'right', text: 'Lei' }],
+                            ['Salariu de baza', '', { alignment: 'right', text: x.salaryB }],
+                            ['Ore standard', { alignement: 'center', text: x.nl }, { alignment: 'right', text: x.salaryB }],
+                            ['Ore suplimentare ' + x.ss + '%', { alignment: 'center', text: x.tl - x.nl }, { alignment: 'right', text: x.os }],
+                            ['Sporuri', '', { alignment: 'right', text: x.sporuri }],
+                            ['Salariu Brut', '', { alignment: 'right', text: +x.salary }],
+                            ['Total venituri', '', { alignment: 'right', text: x.salary }],
+                            ['Asigurari Sociale (CAS) ' + x.casaP + '%', '', { alignment: 'right', text: x.casa }],
+                            ['Asigurari Sociale de Sanatate (CASS) ' + x.cassaP + '%', '', { alignment: 'right', text: x.cassa }],
+                            ['Fondul de Somaj (CFS) ' + x.cfsaP + '%', '', { alignment: 'right', text: x.cfsa }],
+                            ['Deducere Personala (DP) ', '', { alignment: 'right', text: x.dp }],
+                            ['Impozit pe venit (IV) ' + x.ivP + '%', '', { alignment: 'right', text: x.iv }],
+                            ['Total Taxe ', '', { alignment: 'right', text: x.taxe }],
+                            ['Salariu Net', '', { alignment: 'right', text: +x.salaryN + (+x.retineri) }],
+                            ['Retineri ', '', { alignment: 'right', text: x.retineri }],
+                            ['', '', { alignment: 'right', text: 'Lei' }],
+                            ['Rest de plata ', '', { alignment: 'right', text: x.salaryN }]
+                        ]
+                    }
+                },
+
+            ],
+
+            styles: {
+                header: {
+                    float: screenLeft,
+                    fontSize: 18,
+                    bold: true,
+                    margin: [0, 0, 0, 5]
+                },
+                tableExample: {
+                    margin: [0, 5, 0, 15],
+                    alignment: 'left'
+                },
+                tableHeader: {
+                    bold: true,
+                    fontSize: 13,
+                    margin: [0, 0, 0, 0]
+                }
+            }
+        }
         pdfMake.createPdf(fluturas).open();
     }
 
