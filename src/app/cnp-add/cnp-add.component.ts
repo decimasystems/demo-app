@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { CnpValidator } from './cnp-validators';
-var _ = require('lodash');
+import * as _ from 'lodash';
 
 @Component({
     selector: 'add',
@@ -100,8 +100,6 @@ export class AddComponent {
         this.valid2 = this.myForm.controls['valid2'];
         this.issued = this.myForm.controls['issued'];
     }
-
-
 
     addOrUpdateCnp() {
         this.submitted = true;

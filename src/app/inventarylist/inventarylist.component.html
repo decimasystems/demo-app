@@ -23,9 +23,10 @@
     <td>{{i.pieces}}</td>
     <td>{{i.period}}</td>
     <td>
-      <a [routerLink]="updateObject(i.nr)">Modifica</a>
+      <button type="button" [routerLink]="updateObject(i.nr)">Modifica</button>
       <button type="button" (click)="deleteObject(i.nr)">Sterge</button>
     </td>
   </tr>
 </table>
-<a [routerLink]="updateObject('adauga')">Adauga</a>
+<button type="button" [routerLink]="updateObject('adauga')">Adauga</button>
+<button type="button" (click)="print()">Imprima</button>

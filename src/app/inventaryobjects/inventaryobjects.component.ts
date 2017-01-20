@@ -1,4 +1,4 @@
-var _ = require('lodash');
+import * as _ from 'lodash';
 
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';

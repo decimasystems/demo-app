@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-var _ = require('lodash');
+import * as _ from 'lodash';
 @Component({
     selector: 'list',
     templateUrl: './cnp-list.component.html',
@@ -21,7 +21,7 @@ export class ListComponent implements OnInit {
         this.b = _.remove(this.date, 
         x => { 
 
-            return x.cnp==cnp;
+            return (x as any).cnp==cnp;
 })
 
         localStorage.setItem(this.key, JSON.stringify(this.date))
