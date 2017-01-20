@@ -21,7 +21,7 @@ export class ListComponent implements OnInit {
         this.b = _.remove(this.date, 
         x => { 
 
-            return x.cnp==cnp;
+            return (x as any).cnp==cnp;
 })
 
         localStorage.setItem(this.key, JSON.stringify(this.date))

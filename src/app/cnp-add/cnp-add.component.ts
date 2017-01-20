@@ -98,8 +98,6 @@ export class AddComponent {
         this.issued = this.myForm.controls['issued'];
     }
 
-
-
     addOrUpdateCnp() {
         this.submitted = true;
         var buletine: any[];
