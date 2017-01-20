@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { Numeral } from 'numbertowords/numeral.js';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
+import {HttpModule} from '@angular/http'
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AddComponent } from './cnp-add/cnp-add.component';
@@ -41,7 +42,8 @@ export const routes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]
