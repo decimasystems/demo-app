@@ -47,7 +47,7 @@
         <label>Adresa: </label>
     </p>
     <p>
-       <!-- <label>Judet</label>
+        <label>Judet</label>
         <select name="county" [formControl]="county">
             <option value="Alba">Alba</option>
             <option value="Arad">Arad</option>
@@ -90,25 +90,25 @@
             <option value="Vaslui">Vaslui</option>
             <option value="Valcea">Valcea</option>
             <option value="Vrancea">Vrancea</option>
-        </select>-->
+        </select>
     </p>
 
 
     <p>
         <label>Localitate/ Oras: </label>
 
-
+        <!--
         <select [formControl]="county">  
            <option  *ngFor="let l of localitati" value="{{l}}"> {{l.name}} </option>
          </select>
          {{county?.value |json}}
         <select>
-             <option *ngFor="let c of county?.value?.comune" value="{{c}}"> {{c}}</option>
-        </select>
-       
-       
-       <!-- <input type="text" [formControl]="city">-->
-         
+             <option  *ngFor="let c of county?.value?.numeC" value="{{c}}"> {{c.numeC}}</option>
+        </select>-->
+
+
+        <input type="text" [formControl]="city">
+
     </p>
 
     <p>

@@ -51,7 +51,10 @@ export class AddComponent {
                     this.persoana = _.find(this.buletin, { 'cnp': this.id })
                 }
                 this.buildForm();
-                this.localitati = [{ name: 'Suceava', comune: ['Salcea', 'Plopeni'] }, { name: 'Neamt', comune: ['Draguseni', 'bla bla'] }]
+                this.localitati = [{ name: 'Suceava', comune: [{ numec: 'Salcea', sate: ['aaa', 'bbb'] }, { numeC: 'Plopeni', sate: ['ggg', 'fgdfdg'] }] },
+                {
+                    name: 'Neamt', comune: [{ numeC: 'Draguseni', sate: ['ddd', 'eee'] }, { numeC: 'bla bla', sate: ['asa', 'vgd'] }]
+                }]
             }
         });
 

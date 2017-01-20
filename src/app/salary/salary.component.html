@@ -2,7 +2,7 @@
   <label for="brut_id">Salariu brut: </label>
   <input type="text" id="brut_id" [formControl]="salaryB">lei
   <label for="net_id"> Salariu net: </label>
-  <input type="text" id="net_id" [formControl]="salaryN" >lei
+  <input type="text" id="net_id" [formControl]="salaryN">lei
   <label for="complet_id">Salariu complet: </label>
   <input type="text" id="complet_id" [formControl]="salaryC">lei<br/>
   <hr/>
@@ -17,7 +17,7 @@
     </tr>
     <tr>
       <td>Asigurari Sociale de Sanatate (CASSa)</td>
-      <td><input type="text" size="1"[formControl]="cassaP">%</td>
+      <td><input type="text" size="1" [formControl]="cassaP">%</td>
       <td> <input type="text" [formControl]="cassa">lei</td>
       <td>
     </tr>
@@ -29,11 +29,8 @@
     <tr>
       <td>Deducere Personala (DP)</td>
       <td><select [formControl]="dpp">
-      <option value="300">0</option>
-      <option value="400">1</option>
-      <option value="500">2</option>
-      <option value="600">3</option>
-      <option value="800">4+</option>
+      <option *ngFor="let d of deducere" value="{{d.valoare}}">{{d.nume}}</option>
+     
     </select></td>
       <td> <input type="text" [formControl]="dp">lei</td>
     </tr>
@@ -80,9 +77,16 @@
     </tr>
     <hr/>
     <tr>
-      <td rowspan="10">Calcul salariu</td>
-     
+      <td rowspan="11">Calcul salariu</td>
+
     </tr>
+
+    <tr>
+      <td>Salariu brut modificat</td>
+      <td></td>
+      <td><input type="text" [formControl]="salary"></td>
+    </tr>
+  
     <tr>
       <td>Norma lunara</td>
       <td></td>
@@ -103,12 +107,12 @@
     <tr>
       <td>Bonusuri</td>
       <td></td>
-      <td><input type="text">lei</td>
+      <td><input type="text" [formControl]="bonusuri">lei</td>
     </tr>
     <tr>
       <td>Sporuri</td>
       <td></td>
-      <td><input type="text">lei</td>
+      <td><input type="text" [formControl]="sporuri">lei</td>
     </tr>
     <tr>
       <td>Retineri (din salariul net)</td>
@@ -129,10 +133,12 @@
       <td>Luna</td>
       <td></td>
       <td><select [formControl]="luna">
-    <option *ngFor="let l of luni" value="l">{{l}}</option>
+    <option *ngFor="let l of luni" value="{{l}}">{{l}}</option>
   </select></td>
-     
+
     </tr>
-    <tr> <td> <button type="button" (click)="genereaza()">Genereaza fluturas de salariu</button></td></tr>
+    <tr>
+      <td> <button type="button" (click)="genereaza()">Genereaza fluturas de salariu</button></td>
+    </tr>
   </table>
 </form>
