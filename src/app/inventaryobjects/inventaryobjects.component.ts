@@ -42,7 +42,7 @@ export class InventaryobjectsComponent implements OnInit {
                     this.inventary = JSON.parse(localStorage.getItem('inv'));
                     console.log(this.inventary);
                     this.element = _.find(this.inventary, { 'nr': +this.id });
-                     console.log(this.element);
+                    console.log(this.element);
                 }
                 this.buildForm();
             }
@@ -100,15 +100,19 @@ export class InventaryobjectsComponent implements OnInit {
     }
 
     addObject() {
-        var inventary: any[];
-
-        inventary = JSON.parse(localStorage.getItem(this.key));
-        if (!inventary) {
+        this.inventary = JSON.parse(localStorage.getItem(this.key));
+        /*if (!inventary) {
             inventary = [];
-        }
+        }*/
         if (this.myForm.valid) {
-            inventary.push(this.myForm.value);
-            localStorage.setItem(this.key, JSON.stringify(inventary));
+            if (this.id != 'adauga') {
+                this.element = _.findIndex(this.inventary, { 'nr': +this.id });
+                this.inventary[this.element] = this.myForm.value;
+            } else {
+                this.inventary.push(this.myForm.value);
+            }
+
+            localStorage.setItem(this.key, JSON.stringify(this.inventary));
             this.router.navigate(['inventarylist']);
         }
     }

@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.18",
+    "version": "1.0.0-beta.26",
     "name": "demo-app"
   },
   "apps": [
@@ -20,10 +20,10 @@
       "styles": [
         "styles.css"
       ],
-      "scripts": [
+      "scripts": [ 
         "../node_modules/pdfmake/build/pdfmake.min.js",
         "../node_modules/pdfmake/build/vfs_fonts.js"
-      ],
+        ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
@@ -31,8 +31,6 @@
       }
     }
   ],
-  "addons": [],
-  "packages": [],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"
