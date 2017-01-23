@@ -206,7 +206,7 @@ export class SalaryComponent implements OnInit {
             this.supliment = (+this.salaryB.value / +this.nl.value) * (+this.tl.value - +this.nl.value) * (+value + 100) / 100;
             this.salary.patchValue((+this.salaryB.value + (+this.supliment)).toFixed(2))
         });
-        this.bonusuri.valueChanges.subscribe((value) => this.salary.patchValue((+this.salaryB.value + +value + +this.supliment).toFixed(2)))
+        this.bonusuri.valueChanges.subscribe((value) => this.salary.patchValue((+this.salaryB.value + +value + +this.supliment+ +this.sporuri.value).toFixed(2)))
         this.sporuri.valueChanges.subscribe((value) => this.salary.patchValue((+this.salaryB.value + +value + +this.supliment + +this.bonusuri.value).toFixed(2)));
         this.retineri.valueChanges.subscribe((value) => this.salaryN.patchValue((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value - value).toFixed(2)));
     }

@@ -67,22 +67,22 @@ export class AddComponent {
     }
     buildForm() {
         this.myForm = this.fb.group({
-            'series': [this.persoana.series, Validators.compose([Validators.required, CnpValidator.inputTextValidator])],
-            'number': [this.persoana.number, Validators.compose([Validators.required, CnpValidator.inputNumberValidator, CnpValidator.lengthValid6])],
+            'series': [this.persoana.series, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]/),Validators.maxLength(2)])],
+            'number': [this.persoana.number, Validators.compose([Validators.required, Validators.pattern(/[0-9]/), Validators.maxLength(6),])],
             'cnp': [this.persoana.cnp, Validators.compose([Validators.required, CnpValidator.cnpValid])],
-            'lastName': [this.persoana.lastName, Validators.compose([Validators.required, CnpValidator.inputTextValidator])],
-            'firstName': [this.persoana.firstName, Validators.compose([Validators.required, CnpValidator.inputTextValidator])],
-            'nationality': [this.persoana.nationality, Validators.compose([Validators.required, CnpValidator.inputTextValidator])],
-            'birth': [this.persoana.birth, Validators.compose([Validators.required, CnpValidator.inputTextValidator])],
-            'county': [this.persoana.county, Validators.compose([Validators.required, CnpValidator.inputTextValidator])],
-            'city': [this.persoana.city, Validators.compose([Validators.required, CnpValidator.inputTextValidator])],
-            'street': [this.persoana.street, Validators.compose([Validators.required, CnpValidator.inputTextValidator])],
-            'streetNr': [this.persoana.streetNr, Validators.compose([Validators.required, CnpValidator.inputNumberValidator])],
-            'block': [this.persoana.block, Validators.required],
-            'scale': [this.persoana.scale, Validators.compose([Validators.required, CnpValidator.inputTextValidator])],
-            'floor': [this.persoana.floor, Validators.compose([Validators.required, CnpValidator.inputNumberValidator])],
-            'apartament': [this.persoana.apartament, Validators.compose([Validators.required, CnpValidator.inputNumberValidator])],
-            'issued': [this.persoana.issued, Validators.compose([Validators.required, CnpValidator.inputTextValidator])],
+            'lastName': [this.persoana.lastName, Validators.compose([Validators.required,Validators.pattern(/[A-Za-z]/)])],
+            'firstName': [this.persoana.firstName, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]/)])],
+            'nationality': [this.persoana.nationality, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]/)])],
+            'birth': [this.persoana.birth, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]/)])],
+            'county': [this.persoana.county, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]/)])],
+            'city': [this.persoana.city, Validators.compose([Validators.required,Validators.pattern(/[A-Za-z]/)])],
+            'street': [this.persoana.street, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]/)])],
+            'streetNr': [this.persoana.streetNr, Validators.compose([Validators.required,  Validators.pattern(/[0-9]/)])],
+            'block': [this.persoana.block],
+            'scale': [this.persoana.scale, Validators.pattern(/[A-Za-z]/)],
+            'floor': [this.persoana.floor,  Validators.pattern(/[0-9]/)],
+            'apartament': [this.persoana.apartament, Validators.compose([ CnpValidator.inputNumberValidator])],
+            'issued': [this.persoana.issued, Validators.compose([Validators.required,Validators.pattern(/[A-Za-z]/)])],
             'valid1': [this.persoana.valid1, Validators.required],
             'valid2': [this.persoana.valid2, Validators.required]
         });
@@ -108,7 +108,9 @@ export class AddComponent {
 
     addOrUpdateCnp() {
         this.submitted = true;
-        if (this.myForm.valid) {
+        if (this.series.value && this.number.value && this.county.value &&
+            this.city.value &&  this.streetNr.value &&  this.birth.value && this.cnp.value && this.firstName.value && this.lastName.value && this.issued.value &&
+           this.nationality.value && this.valid1.value && this.valid2.value) {
             if (this.id != 'adauga') {
                 var b = _.findIndex(this.buletine, { 'cnp': this.id });
                 this.buletine[b] = this.myForm.value;
@@ -122,6 +124,7 @@ export class AddComponent {
             });
 
         }
+   
     }
 }
 

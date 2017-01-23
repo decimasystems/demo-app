@@ -2,45 +2,53 @@
     <p>
         <label for="series_id">Serie card identitate: </label>
         <input type="text" id="series_id" [formControl]="series">
-        <span *ngIf="submitted && series.hasError('validInput')">Trebuie sa contina doar cifre!</span>
-        <span *ngIf="submitted && series.hasError('validLength')">Trebuie sa contina doar 2 caractere!</span>
+        <span *ngIf="submitted && series.hasError('pattern')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && series.hasError('maxlength')">Trebuie sa contina doar 2 caractere!</span>
+        <span *ngIf="submitted && series.hasError('required')">Camp obligatoriu</span>
     </p>
 
     <p>
         <label for="number_id">Numar: </label>
         <input type="text" id="number_id" [formControl]="number">
-        <span *ngIf="submitted && number.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
-        <span *ngIf="submitted && number.hasError('validLength6')">Trebuie sa contina doar 6 cifre!</span>
+        <span *ngIf="submitted && number.hasError('pattern')">Trebuie sa contina doar cifre!</span>
+        <span *ngIf="submitted && number.hasError('maxlength')">Trebuie sa contina doar 6 cifre!</span>
+        <span *ngIf="submitted && number.hasError('required')">Camp obligatoriu</span>
     </p>
 
     <p>
         <label for="cnp_id">CNP: </label>
         <input type="text" id="cnp_id" [formControl]="cnp">
+        <span *ngIf="submitted && cnp.hasError('required')">Camp obligatoriu</span>
         <span *ngIf="submitted && cnp.hasError('codValid')">CNP invalid!</span>
+
     </p>
 
     <p>
         <label for="lastname_id">Nume: </label>
         <input type="text" id="lastname_id" [formControl]="lastName">
-        <span *ngIf="submitted && lastName.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && lastName.hasError('pattern')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && lastName.hasError('required')">Camp obligatoriu</span>
     </p>
 
     <p>
         <label for="firstname_id">Prenume: </label>
         <input type="text" id="firstname_id" [formControl]="firstName">
-        <span *ngIf="submitted && firstName.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && firstName.hasError('pattern')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && firstName.hasError('required')">Camp obligatoriu</span>
     </p>
 
     <p>
         <label for="nationality_id">Nationalitate: </label>
         <input type="text" id="nationality_id" [formControl]="nationality">
-        <span *ngIf="submitted && nationality.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && nationality.hasError('pattern')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && nationality.hasError('required')">Camp obligatoriu</span>
     </p>
 
     <p>
         <label for="birth_id">Locul nasterii: </label>
         <input type="text" id="birth_id" [formControl]="birth">
-        <span *ngIf="submitted && birth.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && birth.hasError('pattern')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && birth.hasError('required')">Camp obligatoriu</span>
     </p>
 
     <p>
@@ -91,6 +99,7 @@
             <option value="Valcea">Valcea</option>
             <option value="Vrancea">Vrancea</option>
         </select>
+        <span *ngIf="submitted && county.hasError('required')">Camp obligatoriu</span>
     </p>
 
 
@@ -108,6 +117,7 @@
 
 
         <input type="text" [formControl]="city">
+        <span *ngIf="submitted && city.hasError('required')">Camp obligatoriu</span>
 
     </p>
 
@@ -115,7 +125,7 @@
         <label>Str: </label>
         <input type="text" [formControl]="street">
         <span *ngIf="submitted">
-            <span *ngIf="submitted && street.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+            <span *ngIf="submitted && street.hasError('pattern')">Trebuie sa contina doar litere!</span>
         </span>
     </p>
 
@@ -123,7 +133,7 @@
         <label>Nr: </label>
         <input type="text" [formControl]="streetNr">
         <span *ngIf="submitted">
-            <span *ngIf="submitted && streetNr.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+            <span *ngIf="submitted && streetNr.hasError('pattern')">Trebuie sa contina doar cifre!</span>
         </span>
     </p>
 
@@ -135,31 +145,35 @@
     <p>
         <label>Sc: </label>
         <input type="text" [formControl]="scale">
+        
     </p>
 
     <p>
         <label>Et: </label>
         <input type="text" [formControl]="floor">
-        <span *ngIf="submitted && floor.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+        <span *ngIf="submitted && floor.hasError('pattern')">Trebuie sa contina doar cifre!</span>
     </p>
 
     <p>
         <label>Ap: </label>
         <input type="text" [formControl]="apartament">
-        <span *ngIf="submitted && apartament.hasError('validNumber')">Trebuie sa contina doar cifre!</span>
+        <span *ngIf="submitted && apartament.hasError('pattern')">Trebuie sa contina doar cifre!</span>
     </p>
 
     <p>
         <label for="issued_id">Eliberat de: </label>
         <input type="text" id="issued_id" [formControl]="issued">
-        <span *ngIf="submitted && issued.hasError('invalidInput')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && issued.hasError('pattern')">Trebuie sa contina doar litere!</span>
+        <span *ngIf="submitted && issued.hasError('required')">Camp obligatoriu</span>
     </p>
 
     <p>
         <label for="validity_id">Valabilitate: </label>
         <input type="date" id="validity_id" [formControl]="valid1">
+        <span *ngIf="submitted && valid1.hasError('required')">Camp obligatoriu</span>
         <label for="valid2_id"> Pana la: </label>
         <input type="date" id="valid2_id" [formControl]="valid2">
+        <span *ngIf="submitted && valid2.hasError('required')">Camp obligatoriu</span>
     </p>
 
 </form>
