@@ -1,6 +1,7 @@
 <form [formGroup]="myForm">
   <label for="brut_id">Salariu brut: </label>
   <input type="text" id="brut_id" [formControl]="salaryB">lei
+  <span *ngIf="salaryB.hasError('pattern')">Introduceti doar cifre</span>
   <label for="net_id"> Salariu net: </label>
   <input type="text" id="net_id" [formControl]="salaryN">lei
   <label for="complet_id">Salariu complet: </label>

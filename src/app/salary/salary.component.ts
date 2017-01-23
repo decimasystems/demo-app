@@ -55,7 +55,7 @@ export class SalaryComponent implements OnInit {
 
     ngOnInit() {
         this.myForm = this.fb.group({
-            'salaryB': ['', Validators.required],
+            'salaryB': ['',Validators.compose([Validators.required,Validators.pattern(/[0-9]+/g)]) ],
             'salaryN': ['', Validators.required],
             'salaryC': ['', Validators.required],
             'casa': ['', Validators.required],
@@ -204,9 +204,10 @@ export class SalaryComponent implements OnInit {
 
         this.ss.valueChanges.subscribe((value) => {
             this.supliment = (+this.salaryB.value / +this.nl.value) * (+this.tl.value - +this.nl.value) * (+value + 100) / 100;
-            this.salary.patchValue((+this.salaryB.value + (+this.supliment)).toFixed(2))
+            if (this.supliment > 0)
+                this.salary.patchValue((+this.salaryB.value + (+this.supliment)).toFixed(2))
         });
-        this.bonusuri.valueChanges.subscribe((value) => this.salary.patchValue((+this.salaryB.value + +value + +this.supliment+ +this.sporuri.value).toFixed(2)))
+        this.bonusuri.valueChanges.subscribe((value) => this.salary.patchValue((+this.salaryB.value + +value + +this.supliment + +this.sporuri.value).toFixed(2)))
         this.sporuri.valueChanges.subscribe((value) => this.salary.patchValue((+this.salaryB.value + +value + +this.supliment + +this.bonusuri.value).toFixed(2)));
         this.retineri.valueChanges.subscribe((value) => this.salaryN.patchValue((this.salary.value - this.casa.value - this.cassa.value - this.cfsa.value - this.iv.value - value).toFixed(2)));
     }
@@ -229,66 +230,55 @@ export class SalaryComponent implements OnInit {
         this.myForm.controls[valueControlName].patchValue(x, true);
 
     }
+   
     genereaza() {
         var x: any;
         x = this.myForm.value;
         x.os = ((+x.salaryB / +x.nl) * (+x.tl - +x.nl) * (+x.ss + 100) / 100).toFixed(2);
         x.taxe = (+x.cassa + +x.cfsa + +x.casa + +x.dpp + +x.iv).toFixed(2);
         var fluturas = {
-            content: [
-                {
-                    style: 'tableHeader',
-                    table: {
-                        body: [
-                            ['Nume Firma', x.luna + '/2017'],
-                            [x.numeF, '']
-                        ]
-                    }
+            content:
+            {
+                style: 'tableExample',
+                table: {
+                    widths: [125, 25,75],
+                    body: [
+                        [{fillColor:'palegreen',text: 'Nume Firma'} , {fillColor:'palegreen',text:''} , {fillColor:'palegreen',text: x.luna + '/2017'}],
+                        [x.numeF, '', ''],
+                        [{fillColor:'palegreen',text:'Salariat:'}, {fillColor:'palegreen',text:''}, {fillColor:'palegreen',text:''}],
+                        [{ bold: true, text: ' Nume Prenume' }, '', { bold: true, alignment: 'right', text: x.numeA }],
+                        ['', '', { alignment: 'right', text: 'Lei' }],
+                        [{ bold: true, text: 'Salariu de baza' }, '', { bold: true, alignment: 'right', text: x.salaryB }],
+                        ['Ore standard', { alignement: 'center', text: x.nl }, { alignment: 'right', text: x.salaryB }],
+                        ['Ore suplimentare ' + x.ss + '%', { alignment: 'center', text: x.tl > x.nl ? x.tl - x.nl : 0 }, { alignment: 'right', text: x.os > 0 ? x.os : 0 }],
+                        ['Sporuri', '', { alignment: 'right', text: x.sporuri }],
+                        [{ bold: true, text: 'Salariu Brut' }, '', { bold: true, alignment: 'right', text: +x.salary }],
+                        [{ bold: true, text: 'Total venituri' }, '', { bold: true, alignment: 'right', text: x.salary }],
+                        [' Asigurari Sociale (CAS) ' + x.casaP + '%', '', { alignment: 'right', text: x.casa }],
+                        [' Asigurari Sociale de Sanatate (CASS) ' + x.cassaP + '%', '', { alignment: 'right', text: x.cassa }],
+                        [' Fondul de Somaj (CFS) ' + x.cfsaP + '%', '', { alignment: 'right', text: x.cfsa }],
+                        [' Deducere Personala (DP) ', '', { alignment: 'right', text: x.dp }],
+                        [' Impozit pe venit (IV) ' + x.ivP + '%', '', { alignment: 'right', text: x.iv }],
+                        [' Total Taxe ', '', { alignment: 'right', text: x.taxe }],
+                        [{ bold: true, text: 'Salariu Net' }, '', { bold: true, alignment: 'right', text: +x.salaryN + (+x.retineri) }],
+                        [' Retineri ', '', { alignment: 'right', text: x.retineri }],
+                        ['', '', { alignment: 'right', text: 'Lei' }],
+                        [{ bold: true, text: 'Rest de plata ' }, '', { bold: true, alignment: 'right', text: x.salaryN }]
+                    ]
                 },
-
-                {
-                    style: 'tableExample',
-                    table: {
-                        body: [
-                            ['Salariat: \n Nume Prenume', '', { alignment: 'right', text: x.numeA }],
-                            ['', '', { alignment: 'right', text: 'Lei' }],
-                            ['Salariu de baza', '', { alignment: 'right', text: x.salaryB }],
-                            ['Ore standard', { alignement: 'center', text: x.nl }, { alignment: 'right', text: x.salaryB }],
-                            ['Ore suplimentare ' + x.ss + '%', { alignment: 'center', text: x.tl - x.nl }, { alignment: 'right', text: x.os }],
-                            ['Sporuri', '', { alignment: 'right', text: x.sporuri }],
-                            ['Salariu Brut', '', { alignment: 'right', text: +x.salary }],
-                            ['Total venituri', '', { alignment: 'right', text: x.salary }],
-                            ['Asigurari Sociale (CAS) ' + x.casaP + '%', '', { alignment: 'right', text: x.casa }],
-                            ['Asigurari Sociale de Sanatate (CASS) ' + x.cassaP + '%', '', { alignment: 'right', text: x.cassa }],
-                            ['Fondul de Somaj (CFS) ' + x.cfsaP + '%', '', { alignment: 'right', text: x.cfsa }],
-                            ['Deducere Personala (DP) ', '', { alignment: 'right', text: x.dp }],
-                            ['Impozit pe venit (IV) ' + x.ivP + '%', '', { alignment: 'right', text: x.iv }],
-                            ['Total Taxe ', '', { alignment: 'right', text: x.taxe }],
-                            ['Salariu Net', '', { alignment: 'right', text: +x.salaryN + (+x.retineri) }],
-                            ['Retineri ', '', { alignment: 'right', text: x.retineri }],
-                            ['', '', { alignment: 'right', text: 'Lei' }],
-                            ['Rest de plata ', '', { alignment: 'right', text: x.salaryN }]
-                        ]
-                    }
-                },
-
-            ],
+                layout:	'lightHorizontalLines'
+                    
+            
+            },
 
             styles: {
-                header: {
-                    float: screenLeft,
-                    fontSize: 18,
-                    bold: true,
-                    margin: [0, 0, 0, 5]
-                },
                 tableExample: {
                     margin: [0, 5, 0, 15],
-                    alignment: 'left'
-                },
-                tableHeader: {
-                    bold: true,
-                    fontSize: 13,
-                    margin: [0, 0, 0, 0]
+                    alignment: 'left',
+                    bold: false,
+                    border: false,
+                   // fillColor:'palegreen'
+                   // background:'palegreen'
                 }
             }
         }
