@@ -81,7 +81,7 @@ export class AddComponent {
             'block': [this.persoana.block],
             'scale': [this.persoana.scale, Validators.pattern(/[A-Za-z]/)],
             'floor': [this.persoana.floor,  Validators.pattern(/[0-9]/)],
-            'apartament': [this.persoana.apartament, Validators.compose([ CnpValidator.inputNumberValidator])],
+            'apartament': [this.persoana.apartament, Validators.pattern(/[0-9]/)],
             'issued': [this.persoana.issued, Validators.compose([Validators.required,Validators.pattern(/[A-Za-z]/)])],
             'valid1': [this.persoana.valid1, Validators.required],
             'valid2': [this.persoana.valid2, Validators.required]
