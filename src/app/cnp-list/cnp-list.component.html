@@ -1,8 +1,12 @@
 <table border="1" width=50% height=70%>
   <tr>
+    <th>Nume:</th>
+    <th>Prenume</th>
     <th>CNP:</th>
   </tr>
   <tr *ngFor="let d of date">
+    <td> {{d.lastName}}</td>
+    <td> {{d.firstName}}</td>
     <td> {{d.cnp}}</td>
     <td>
       <a [routerLink]="link(d.cnp)"> Vezi detalii</a>
@@ -13,4 +17,3 @@
   </tr>
 </table>
 <a [routerLink]="link('adauga')">Adauga o noua inregistrare</a>
-

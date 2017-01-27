@@ -55,7 +55,7 @@ export class SalaryComponent implements OnInit {
 
     ngOnInit() {
         this.myForm = this.fb.group({
-            'salaryB': ['',Validators.compose([Validators.required,Validators.pattern(/[0-9]+/g)]) ],
+            'salaryB': ['', Validators.compose([Validators.required, Validators.pattern(/[0-9]+/g)])],
             'salaryN': ['', Validators.required],
             'salaryC': ['', Validators.required],
             'casa': ['', Validators.required],
@@ -230,7 +230,7 @@ export class SalaryComponent implements OnInit {
         this.myForm.controls[valueControlName].patchValue(x, true);
 
     }
-   
+
     genereaza() {
         var x: any;
         x = this.myForm.value;
@@ -241,34 +241,46 @@ export class SalaryComponent implements OnInit {
             {
                 style: 'tableExample',
                 table: {
-                    widths: [125, 25,75],
+                    widths: [125, 25, 75],
                     body: [
-                        [{fillColor:'palegreen',text: 'Nume Firma'} , {fillColor:'palegreen',text:''} , {fillColor:'palegreen',text: x.luna + '/2017'}],
+                        [{ fillColor: 'palegreen', text: 'Nume Firma' }, { fillColor: 'palegreen', text: '' }, { fillColor: 'palegreen', text: x.luna + '/2017' }],
                         [x.numeF, '', ''],
-                        [{fillColor:'palegreen',text:'Salariat:'}, {fillColor:'palegreen',text:''}, {fillColor:'palegreen',text:''}],
-                        [{ bold: true, text: ' Nume Prenume' }, '', { bold: true, alignment: 'right', text: x.numeA }],
+                        [{ fillColor: 'palegreen', text: 'Salariat: \n Nume Prenume' }, { fillColor: 'palegreen', text: '' }, { fillColor: 'palegreen', bold: true, alignment: 'right', text: '\n' + x.numeA }],
                         ['', '', { alignment: 'right', text: 'Lei' }],
-                        [{ bold: true, text: 'Salariu de baza' }, '', { bold: true, alignment: 'right', text: x.salaryB }],
+                        [{ fillColor: 'palegreen', bold: true, text: 'Salariu de baza' }, { fillColor: 'palegreen', text: '' }, { fillColor: 'palegreen', bold: true, alignment: 'right', text: x.salaryB }],
                         ['Ore standard', { alignement: 'center', text: x.nl }, { alignment: 'right', text: x.salaryB }],
-                        ['Ore suplimentare ' + x.ss + '%', { alignment: 'center', text: x.tl > x.nl ? x.tl - x.nl : 0 }, { alignment: 'right', text: x.os > 0 ? x.os : 0 }],
+                        [{ fillColor: 'palegreen', text: 'Ore suplimentare ' + x.ss + '%' }, { fillColor: 'palegreen', alignment: 'center', text: x.tl > x.nl ? x.tl - x.nl : 0 }, { fillColor: 'palegreen', alignment: 'right', text: x.os > 0 ? x.os : 0 }],
                         ['Sporuri', '', { alignment: 'right', text: x.sporuri }],
-                        [{ bold: true, text: 'Salariu Brut' }, '', { bold: true, alignment: 'right', text: +x.salary }],
+                        [{ fillColor: 'palegreen', bold: true, text: 'Salariu Brut' }, { fillColor: 'palegreen', text: '' }, { fillColor: 'palegreen', bold: true, alignment: 'right', text: +x.salary }],
                         [{ bold: true, text: 'Total venituri' }, '', { bold: true, alignment: 'right', text: x.salary }],
-                        [' Asigurari Sociale (CAS) ' + x.casaP + '%', '', { alignment: 'right', text: x.casa }],
+                        [{ fillColor: 'palegreen', text: ' Asigurari Sociale (CAS) ' + x.casaP + '%' }, { text: '', fillColor: 'palegreen' }, { fillColor: 'palegreen', alignment: 'right', text: x.casa }],
                         [' Asigurari Sociale de Sanatate (CASS) ' + x.cassaP + '%', '', { alignment: 'right', text: x.cassa }],
-                        [' Fondul de Somaj (CFS) ' + x.cfsaP + '%', '', { alignment: 'right', text: x.cfsa }],
+                        [{ fillColor: 'palegreen', text: ' Fondul de Somaj (CFS) ' + x.cfsaP + '%' }, { fillColor: 'palegreen', text: '' }, { fillColor: 'palegreen', alignment: 'right', text: x.cfsa }],
                         [' Deducere Personala (DP) ', '', { alignment: 'right', text: x.dp }],
-                        [' Impozit pe venit (IV) ' + x.ivP + '%', '', { alignment: 'right', text: x.iv }],
+                        [{ fillColor: 'palegreen', text: ' Impozit pe venit (IV) ' + x.ivP + '%' }, { fillColor: 'palegreen', text: '' }, { fillColor: 'palegreen', alignment: 'right', text: x.iv }],
                         [' Total Taxe ', '', { alignment: 'right', text: x.taxe }],
-                        [{ bold: true, text: 'Salariu Net' }, '', { bold: true, alignment: 'right', text: +x.salaryN + (+x.retineri) }],
+                        [{ fillColor: 'palegreen', bold: true, text: 'Salariu Net' }, { fillColor: 'palegreen', text: '' }, { fillColor: 'palegreen', bold: true, alignment: 'right', text: +x.salaryN + (+x.retineri) }],
                         [' Retineri ', '', { alignment: 'right', text: x.retineri }],
-                        ['', '', { alignment: 'right', text: 'Lei' }],
+                        [{ fillColor: 'palegreen', text: '' }, { fillColor: 'palegreen', text: '' }, { fillColor: 'palegreen', alignment: 'right', text: 'Lei' }],
                         [{ bold: true, text: 'Rest de plata ' }, '', { bold: true, alignment: 'right', text: x.salaryN }]
                     ]
                 },
-                layout:	'lightHorizontalLines'
-                    
-            
+                layout: {
+                    hLineWidth: function (i, node) {
+                        return (i === 0 || i === node.table.body.length) ? 2 : 1;
+                    },
+                    vLineWidth: function (i, node) {
+                        return (i === 0 || i === node.table.widths.length) ? 0 : 0;
+                    },
+                    hLineColor: function (i, node) {
+                        return (i === 0 || i === 3 || i === 18 || i === node.table.body.length) ? 'blue' : 'gray';
+                    },
+                    vLineColor: function (i, node) {
+                        return (i === 0 || i === node.table.widths.length) ? 'gray' : 'gray';
+                    }
+                }
+
+
             },
 
             styles: {
@@ -276,9 +288,7 @@ export class SalaryComponent implements OnInit {
                     margin: [0, 5, 0, 15],
                     alignment: 'left',
                     bold: false,
-                    border: false,
-                   // fillColor:'palegreen'
-                   // background:'palegreen'
+                    border: false
                 }
             }
         }

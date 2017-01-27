@@ -34,7 +34,7 @@ export class AddComponent {
     persoana: any;
     localitati: any[];
     submitted: boolean;
-    url: string = 'https://abcd-88376.firebaseio.com/cnp-data.json';
+    url: string = 'http://localhost:4000/cards';
     buletine: any[];
     constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: Http) {
         this.submitted = false;
@@ -43,46 +43,43 @@ export class AddComponent {
     ngOnInit() {
         this.route.params.subscribe(params => {
             this.id = params['id'];
-            this.http.get(this.url).subscribe(
-                (res: Response) => {
-                    this.buletine = res.json();
-                    if (!this.buletine) {
-                        this.buletine = [];
-                    }
-                    if (this.id) {
-                        if (this.id == 'adauga') {
-                            this.persoana = {};
-                        } else {
-                            this.persoana = _.find(this.buletine, { 'cnp': this.id })
-                        }
+            if (this.id) {
+                if (this.id == 'adauga') {
+                    this.persoana = {};
+                    this.buildForm();
+                } else {
+                    this.http.get(this.url + '/' + this.id).subscribe((response: Response) => {
+                        this.persoana = response.json();
                         this.buildForm();
-                        this.localitati = [{ name: 'Suceava', comune: [{ numec: 'Salcea', sate: ['aaa', 'bbb'] }, { numeC: 'Plopeni', sate: ['ggg', 'fgdfdg'] }] },
-                        {
-                            name: 'Neamt', comune: [{ numeC: 'Draguseni', sate: ['ddd', 'eee'] }, { numeC: 'bla bla', sate: ['asa', 'vgd'] }]
-                        }]
-                    }
-                });
+                    });
+                }
+
+                this.localitati = [{ name: 'Suceava', comune: [{ numec: 'Salcea', sate: ['aaa', 'bbb'] }, { numeC: 'Plopeni', sate: ['ggg', 'fgdfdg'] }] },
+                {
+                    name: 'Neamt', comune: [{ numeC: 'Draguseni', sate: ['ddd', 'eee'] }, { numeC: 'bla bla', sate: ['asa', 'vgd'] }]
+                }]
+            }
         });
-        
+
     }
     buildForm() {
         this.myForm = this.fb.group({
-            'series': [this.persoana.series, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g),Validators.maxLength(2)])],
+            'series': [this.persoana.series, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g), Validators.maxLength(2)])],
             'number': [this.persoana.number, Validators.compose([Validators.required, Validators.pattern(/[0-9]+/g), Validators.maxLength(6),])],
             'cnp': [this.persoana.cnp, Validators.compose([Validators.required, CnpValidator.cnpValid])],
-            'lastName': [this.persoana.lastName, Validators.compose([Validators.required,Validators.pattern(/[A-Za-z]+/g)])],
+            'lastName': [this.persoana.lastName, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
             'firstName': [this.persoana.firstName, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
             'nationality': [this.persoana.nationality, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
             'birth': [this.persoana.birth, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
             'county': [this.persoana.county, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'city': [this.persoana.city, Validators.compose([Validators.required,Validators.pattern(/[A-Za-z]+/g)])],
+            'city': [this.persoana.city, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
             'street': [this.persoana.street, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'streetNr': [this.persoana.streetNr, Validators.compose([Validators.required,  Validators.pattern(/[0-9]+/g)])],
+            'streetNr': [this.persoana.streetNr, Validators.compose([Validators.required, Validators.pattern(/[0-9]+/g)])],
             'block': [this.persoana.block],
             'scale': [this.persoana.scale, Validators.pattern(/[A-Za-z]+/g)],
-            'floor': [this.persoana.floor,  Validators.pattern(/[0-9]+/g)],
+            'floor': [this.persoana.floor, Validators.pattern(/[0-9]+/g)],
             'apartament': [this.persoana.apartament, Validators.pattern(/[0-9]+/g)],
-            'issued': [this.persoana.issued, Validators.compose([Validators.required,Validators.pattern(/[A-Za-z]+/g)])],
+            'issued': [this.persoana.issued, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
             'valid1': [this.persoana.valid1, Validators.required],
             'valid2': [this.persoana.valid2, Validators.required]
         });
@@ -109,22 +106,20 @@ export class AddComponent {
     addOrUpdateCnp() {
         this.submitted = true;
         if (this.series.value && this.number.value && this.county.value &&
-            this.city.value &&  this.streetNr.value &&  this.birth.value && this.cnp.value && this.firstName.value && this.lastName.value && this.issued.value &&
-           this.nationality.value && this.valid1.value && this.valid2.value) {
+            this.city.value && this.streetNr.value && this.birth.value && this.cnp.value && this.firstName.value && this.lastName.value && this.issued.value &&
+            this.nationality.value && this.valid1.value && this.valid2.value) {
             if (this.id != 'adauga') {
-                var b = _.findIndex(this.buletine, { 'cnp': this.id });
-                this.buletine[b] = this.myForm.value;
+                this.http.put(this.url + '/' + this.id, this.myForm.value).subscribe((res: Response) => {
+                    this.router.navigate(['list']);
+                });
             }
             else {
-                this.buletine.push(this.myForm.value);
+                this.http.post(this.url, this.myForm.value).subscribe((res: Response) => {
+                    this.router.navigate(['list']);
+                });
             }
-            this.http.put(this.url, JSON.stringify(this.buletine)).subscribe((res: Response) => {
-                this.buletine = res.json();
-                this.router.navigate(['list']);
-            });
-
         }
-   
+
     }
 }
 
