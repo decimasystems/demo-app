@@ -57,47 +57,7 @@
     <p>
         <label>Judet</label>
         <select name="county" [formControl]="county">
-            <option value="Alba">Alba</option>
-            <option value="Arad">Arad</option>
-            <option value="Arges">Arges</option>
-            <option value="Bacau">Bacau</option>
-            <option value="Bihor">Bihor</option>
-            <option value="Bistrita-Nasaud">Bistrita-Nasaud</option>
-            <option value="Botosani">Botosani</option>
-            <option value="Brasov">Brasov</option>
-            <option value="Braila">Braila</option>
-            <option value="Buzau">Buzau</option>
-            <option value="Caras-Severin">Caras-Severin</option>
-            <option value="Calarasi">Calarasi</option>
-            <option value="Cluj">Cluj</option>
-            <option value="Constanta">Constanta</option>
-            <option value="Covasna">Covasna</option>
-            <option value="Dambovita">Dambovita</option>
-            <option value="Dolj">Dolj</option>
-            <option value="Galati">Galati</option>
-            <option value="Giurgiu">Giurgiu</option>
-            <option value="Gorj">Gorj</option>
-            <option value="Harghita">Harghita</option>
-            <option value="Hunedoara">Hunedoara</option>
-            <option value="Ialomita">Ialomita</option>
-            <option value="Iasi">Iasi</option>
-            <option value="Ilfov">Ilfov</option>
-            <option value="Maramures">Maramures</option>
-            <option value="Mehedinti">Mehedinti</option>
-            <option value="Mures">Mures</option>
-            <option value="Neamt">Neamt</option>
-            <option value="Olt">Olt</option>
-            <option value="Prahova">Prahova</option>
-            <option value="Satu Mare">Satu Mare</option>
-            <option value="Salaj">Salaj</option>
-            <option value="Sibiu">Sibiu</option>
-            <option value="Suceava">Suceava</option>
-            <option value="Teleorman">Teleorman</option>
-            <option value="Timis">Timis</option>
-            <option value="Tulcea">Tulcea</option>
-            <option value="Vaslui">Vaslui</option>
-            <option value="Valcea">Valcea</option>
-            <option value="Vrancea">Vrancea</option>
+            <option *ngFor="let c of counties" value="{{c.judet}}">{{c.denumireLoc}}</option>
         </select>
         <span *ngIf="submitted && county.hasError('required')">Camp obligatoriu</span>
     </p>
@@ -106,19 +66,10 @@
     <p>
         <label>Localitate/ Oras: </label>
 
-        <!--
-        <select [formControl]="county">  
-           <option  *ngFor="let l of localitati" value="{{l}}"> {{l.name}} </option>
-         </select>
-         {{county?.value |json}}
-        <select>
-             <option  *ngFor="let c of county?.value?.numeC" value="{{c}}"> {{c.numeC}}</option>
-        </select>-->
-
-
-        <input type="text" [formControl]="city">
-        <span *ngIf="submitted && city.hasError('required')">Camp obligatoriu</span>
-
+        <select name="city" [formControl]="city">
+            <option *ngFor="let l of localitati" value="{{l.siruta}}">{{l.denumireLoc}}</option>
+        </select>
+        <span *ngIf="submitted && city.hasError('required')">Camp obligatoriu</span> 
     </p>
 
     <p>
@@ -145,7 +96,7 @@
     <p>
         <label>Sc: </label>
         <input type="text" [formControl]="scale">
-        
+
     </p>
 
     <p>

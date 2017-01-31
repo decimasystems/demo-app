@@ -3,8 +3,6 @@ import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from
 import { Router, ActivatedRoute } from '@angular/router'
 import { Http, Response } from '@angular/http'
 import { CnpValidator } from './cnp-validators';
-import * as _ from 'lodash';
-
 @Component({
     selector: 'add',
     templateUrl: './cnp-add.component.html',
@@ -30,11 +28,14 @@ export class AddComponent {
     valid1: AbstractControl;
     valid2: AbstractControl;
     issued: AbstractControl;
+    village: AbstractControl;
     id: string;
     persoana: any;
-    localitati: any[];
+    localitati: any;
+    counties: any;
     submitted: boolean;
     url: string = 'http://localhost:4000/cards';
+    countiesPath: string = 'http://localhost:4000/siruta/counties';
     buletine: any[];
     constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: Http) {
         this.submitted = false;
@@ -46,20 +47,24 @@ export class AddComponent {
             if (this.id) {
                 if (this.id == 'adauga') {
                     this.persoana = {};
+                    this.http.get(this.countiesPath).subscribe((res: Response) => {
+                        this.counties = res.json();
+                    })
+
                     this.buildForm();
+
                 } else {
                     this.http.get(this.url + '/' + this.id).subscribe((response: Response) => {
                         this.persoana = response.json();
+                        this.http.get(this.countiesPath).subscribe((res: Response) => {
+                            this.counties = res.json();
+                        })
                         this.buildForm();
                     });
                 }
-
-                this.localitati = [{ name: 'Suceava', comune: [{ numec: 'Salcea', sate: ['aaa', 'bbb'] }, { numeC: 'Plopeni', sate: ['ggg', 'fgdfdg'] }] },
-                {
-                    name: 'Neamt', comune: [{ numeC: 'Draguseni', sate: ['ddd', 'eee'] }, { numeC: 'bla bla', sate: ['asa', 'vgd'] }]
-                }]
             }
         });
+
 
     }
     buildForm() {
@@ -81,7 +86,8 @@ export class AddComponent {
             'apartament': [this.persoana.apartament, Validators.pattern(/[0-9]+/g)],
             'issued': [this.persoana.issued, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
             'valid1': [this.persoana.valid1, Validators.required],
-            'valid2': [this.persoana.valid2, Validators.required]
+            'valid2': [this.persoana.valid2, Validators.required],
+            'village': [this.persoana.village]
         });
         this.series = this.myForm.controls['series'];
         this.number = this.myForm.controls['number'];
@@ -101,6 +107,13 @@ export class AddComponent {
         this.valid1 = this.myForm.controls['valid1'];
         this.valid2 = this.myForm.controls['valid2'];
         this.issued = this.myForm.controls['issued'];
+        this.village = this.myForm.controls['village'];
+        this.county.valueChanges.subscribe((value: string) => {
+            this.http.get(this.countiesPath + '/' + value+'/loc').subscribe((response: Response) => {
+                this.localitati = response.json();
+            })
+        })
+       
     }
 
     addOrUpdateCnp() {
