@@ -22,7 +22,7 @@ export class AddComponent {
     street: AbstractControl;
     streetNr: AbstractControl;
     block: AbstractControl
-    scale: AbstractControl;
+    entrance: AbstractControl;
     floor: AbstractControl;
     apartament: AbstractControl;
     valid1: AbstractControl;
@@ -30,13 +30,12 @@ export class AddComponent {
     issued: AbstractControl;
     village: AbstractControl;
     id: string;
-    persoana: any;
-    localitati: any;
+    card: any;
+    villages: any;
     counties: any;
     submitted: boolean;
     url: string = 'http://localhost:4000/cards';
     countiesPath: string = 'http://localhost:4000/siruta/counties';
-    buletine: any[];
     constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private http: Http) {
         this.submitted = false;
     }
@@ -46,48 +45,46 @@ export class AddComponent {
             this.id = params['id'];
             if (this.id) {
                 if (this.id == 'adauga') {
-                    this.persoana = {};
+                    this.card = {};
                     this.http.get(this.countiesPath).subscribe((res: Response) => {
                         this.counties = res.json();
-                    })
-
+                    });
                     this.buildForm();
 
                 } else {
                     this.http.get(this.url + '/' + this.id).subscribe((response: Response) => {
-                        this.persoana = response.json();
+                        this.card = response.json();
                         this.http.get(this.countiesPath).subscribe((res: Response) => {
                             this.counties = res.json();
                         })
                         this.buildForm();
                     });
                 }
+
             }
         });
-
-
     }
     buildForm() {
         this.myForm = this.fb.group({
-            'series': [this.persoana.series, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g), Validators.maxLength(2)])],
-            'number': [this.persoana.number, Validators.compose([Validators.required, Validators.pattern(/[0-9]+/g), Validators.maxLength(6),])],
-            'cnp': [this.persoana.cnp, Validators.compose([Validators.required, CnpValidator.cnpValid])],
-            'lastName': [this.persoana.lastName, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'firstName': [this.persoana.firstName, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'nationality': [this.persoana.nationality, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'birth': [this.persoana.birth, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'county': [this.persoana.county, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'city': [this.persoana.city, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'street': [this.persoana.street, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'streetNr': [this.persoana.streetNr, Validators.compose([Validators.required, Validators.pattern(/[0-9]+/g)])],
-            'block': [this.persoana.block],
-            'scale': [this.persoana.scale, Validators.pattern(/[A-Za-z]+/g)],
-            'floor': [this.persoana.floor, Validators.pattern(/[0-9]+/g)],
-            'apartament': [this.persoana.apartament, Validators.pattern(/[0-9]+/g)],
-            'issued': [this.persoana.issued, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'valid1': [this.persoana.valid1, Validators.required],
-            'valid2': [this.persoana.valid2, Validators.required],
-            'village': [this.persoana.village]
+            'series': [this.card.series, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g), Validators.maxLength(2)])],
+            'number': [this.card.number, Validators.compose([Validators.required, Validators.pattern(/[0-9]+/g), Validators.maxLength(6),])],
+            'cnp': [this.card.cnp, Validators.compose([Validators.required, CnpValidator.cnpValid])],
+            'lastName': [this.card.lastName, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
+            'firstName': [this.card.firstName, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
+            'nationality': [this.card.nationality, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
+            'birth': [this.card.birth, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
+            'county': [this.card.county, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
+            'city': [this.card.city, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
+            'street': [this.card.street, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
+            'streetNr': [this.card.streetNr, Validators.compose([Validators.required, Validators.pattern(/[0-9]+/g)])],
+            'block': [this.card.block],
+            'entrance': [this.card.entrance, Validators.pattern(/[A-Za-z]+/g)],
+            'floor': [this.card.floor, Validators.pattern(/[0-9]+/g)],
+            'apartament': [this.card.apartament, Validators.pattern(/[0-9]+/g)],
+            'issued': [this.card.issued, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
+            'valid1': [this.card.valid1, Validators.required],
+            'valid2': [this.card.valid2, Validators.required],
+            'village': [this.card.village]
         });
         this.series = this.myForm.controls['series'];
         this.number = this.myForm.controls['number'];
@@ -100,7 +97,7 @@ export class AddComponent {
         this.street = this.myForm.controls['street'];
         this.streetNr = this.myForm.controls['streetNr'];
         this.block = this.myForm.controls['block'];
-        this.scale = this.myForm.controls['scale'];
+        this.entrance = this.myForm.controls['entrance'];
         this.floor = this.myForm.controls['floor'];
         this.apartament = this.myForm.controls['apartament'];
         this.birth = this.myForm.controls['birth'];
@@ -109,11 +106,14 @@ export class AddComponent {
         this.issued = this.myForm.controls['issued'];
         this.village = this.myForm.controls['village'];
         this.county.valueChanges.subscribe((value: string) => {
-            this.http.get(this.countiesPath + '/' + value+'/loc').subscribe((response: Response) => {
-                this.localitati = response.json();
+            this.http.get(this.countiesPath + '/' + value).subscribe((response: Response) => {
+                this.villages = response.json();
             })
         })
-       
+        this.http.get(this.countiesPath + '/' + this.county.value).subscribe((response: Response) => {
+            this.villages = response.json();
+        })
+
     }
 
     addOrUpdateCnp() {

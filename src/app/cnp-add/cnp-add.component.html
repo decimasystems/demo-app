@@ -67,7 +67,7 @@
         <label>Localitate/ Oras: </label>
 
         <select name="city" [formControl]="city">
-            <option *ngFor="let l of localitati" value="{{l.siruta}}">{{l.denumireLoc}}</option>
+            <option *ngFor="let l of villages" value="{{l.siruta}}">{{l.denumireLoc}}</option>
         </select>
         <span *ngIf="submitted && city.hasError('required')">Camp obligatoriu</span> 
     </p>
@@ -75,17 +75,15 @@
     <p>
         <label>Str: </label>
         <input type="text" [formControl]="street">
-        <span *ngIf="submitted">
             <span *ngIf="submitted && street.hasError('pattern')">Trebuie sa contina doar litere!</span>
-        </span>
+
     </p>
 
     <p>
         <label>Nr: </label>
         <input type="text" [formControl]="streetNr">
-        <span *ngIf="submitted">
             <span *ngIf="submitted && streetNr.hasError('pattern')">Trebuie sa contina doar cifre!</span>
-        </span>
+             <span *ngIf="submitted && streetNr.hasError('required')">Camp obligatoriu</span> 
     </p>
 
     <p>
@@ -95,7 +93,7 @@
 
     <p>
         <label>Sc: </label>
-        <input type="text" [formControl]="scale">
+        <input type="text" [formControl]="entrance">
 
     </p>
 
