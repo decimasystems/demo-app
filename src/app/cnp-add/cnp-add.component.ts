@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router'
 import { Http, Response } from '@angular/http'
 import { CnpValidator } from './cnp-validators';
 @Component({
-    selector: 'add',
+    selector: 'cnp',
     templateUrl: './cnp-add.component.html',
     styleUrls: ['./cnp-add.component.css']
 })
@@ -52,7 +52,7 @@ export class AddComponent {
                     this.buildForm();
 
                 } else {
-                    this.http.get(this.url + '/' + this.id).subscribe((response: Response) => {
+                    this.http.get(this.url + '/card/' + this.id).subscribe((response: Response) => {
                         this.card = response.json();
                         this.http.get(this.countiesPath).subscribe((res: Response) => {
                             this.counties = res.json();
@@ -75,7 +75,7 @@ export class AddComponent {
             'birth': [this.card.birth, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
             'county': [this.card.county, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
             'city': [this.card.city, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
-            'street': [this.card.street, Validators.compose([Validators.required, Validators.pattern(/[A-Za-z]+/g)])],
+            'street': [this.card.street,  Validators.pattern(/[A-Za-z]+/g)],
             'streetNr': [this.card.streetNr, Validators.compose([Validators.required, Validators.pattern(/[0-9]+/g)])],
             'block': [this.card.block],
             'entrance': [this.card.entrance, Validators.pattern(/[A-Za-z]+/g)],
@@ -122,12 +122,12 @@ export class AddComponent {
             this.city.value && this.streetNr.value && this.birth.value && this.cnp.value && this.firstName.value && this.lastName.value && this.issued.value &&
             this.nationality.value && this.valid1.value && this.valid2.value) {
             if (this.id != 'adauga') {
-                this.http.put(this.url + '/' + this.id, this.myForm.value).subscribe((res: Response) => {
+                this.http.put(this.url + '/card/' + this.id, this.myForm.value).subscribe((res: Response) => {
                     this.router.navigate(['list']);
                 });
             }
             else {
-                this.http.post(this.url, this.myForm.value).subscribe((res: Response) => {
+                this.http.post(this.url+'/card', this.myForm.value).subscribe((res: Response) => {
                     this.router.navigate(['list']);
                 });
             }

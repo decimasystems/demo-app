@@ -17,8 +17,8 @@ export class ListComponent implements OnInit {
                 this.date = res.json();
             });
     }
-    link(cnp: string): string {
-        return "/add/" + cnp;
+    link(id: string): string {
+        return "/cnp/" + id;
     }
 
     delete(cnp: string) {

@@ -1,0 +1,68 @@
+<form [formGroup]="myForm" *ngIf="myForm">
+  <p>
+    <label>Denumire firma: </label>
+    <input type="text" [formControl]="denumire">
+  </p>
+  <p>
+    <label>CUI: </label>
+    <input type="text" [formControl]="CUI">
+  </p>
+  <p>
+    <label>Cod inmatriculare: </label>
+    <input type="text" [formControl]="cod_inmatriculare">
+  </p>
+  <p>
+    <label>Stare firma: </label>
+    <input type="text" [formControl]='stare_firma'>
+  </p>
+  <p>
+    <label>Judet: </label>
+    <input type="text" [formControl]="judet">
+  </p>
+  <p>
+    <label>Localitate: </label>
+    <input type="text" [formControl]="localitate">
+  </p>
+  <p>
+    <label>Cod siruta judet: </label>
+    <input type="text" [formControl]="sirutaJudet">
+  </p>
+  <p>
+    <label>Cod siruta localitate: </label>
+    <input type="text" [formControl]="sirutaLocalitate">
+  </p>
+  <p>
+    <label>Str: </label>
+    <input type="text" [formControl]="street">
+  </p>
+  <p>
+    <label>Nr: </label>
+    <input type="text" [formControl]="streetNr">
+  </p>
+  <p>
+    <label>Bl: </label>
+    <input type="text" [formControl]="block">
+  </p>
+  <p>
+    <label>Sc: </label>
+    <input type="text" [formControl]="entrance">
+  </p>
+  <p>
+    <label>Et: </label>
+    <input type="text" [formControl]="floor">
+  </p>
+  <p>
+    <label>Ap: </label>
+    <input type="text" [formControl]="apartament">
+  </p>
+   <p>
+    <label>Telefon: </label>
+    <input type="text" [formControl]="telephone">
+  </p>
+   <p>
+    <label>E-mail: </label>
+    <input type="text" [formControl]="email">
+  </p>
+
+</form>
+<button type="button" (click)="adauga()">Adauga</button>

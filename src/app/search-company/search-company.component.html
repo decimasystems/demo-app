@@ -1,0 +1,10 @@
+<form [formGroup]="myform">
+<p>
+<label>Introduceti CUI-ul firmei cautate: </label>
+<input type="text" [formControl]="cui">
+</p>
+<br/>
+</form>
+<p>
+  <button type="button" (click)="search()">Cauta</button>
+</p>
