@@ -36,13 +36,11 @@ export class CompaniesComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      //this.http.get(this.url + '/store').subscribe((res: Response) => {
-      //  console.log(res.statusText);
         this.http.get(this.url + '/company/' + this.id).subscribe((response: Response) => {
           this.company = response.json();
           this.buildForm();
         });
-     // })
+   
 
     })
 

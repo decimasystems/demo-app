@@ -16,9 +16,6 @@ export class SearchCompanyComponent implements OnInit {
   ngOnInit() {
     this.myform = this.fb.group({ 'cui': '' });
     this.cui = this.myform.controls['cui'];
-    this.http.get(this.url + '/store').subscribe((res: Response) => {
-      console.log(res.statusText);
-    })
   }
   search() {
     this.router.navigate(['./companies/' + this.cui.value]);
